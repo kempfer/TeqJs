@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Teq Local Cloud</title>
+		<script type="text/javascript"  src="Teq.js"></script>		
+		<script type="text/javascript"  src="plugins/TeqArray.js"></script>
+		<script type="text/javascript"  src="plugins/TeqDom.js"></script>
+		<script type="text/javascript"  src="plugins/TeqNumber.js"></script>
+		<script type="text/javascript"  src="plugins/TeqObject.js"></script>
+		<script type="text/javascript"  src="plugins/TeqString.js"></script>		
+		<script type="text/javascript"  src="plugins/TeqWebSql.js"></script>		
+		<script type="text/javascript"  src="plugins/TeqPromise.js"></script>
+	</head>
+	<body>
+		<script>
+			t.dom.onReady(function () {
+				
+				var db = t.webSql({name : "local_cloud"});
+				/*db.execute("CREATE TABLE file_manage (id INTEGER PRIMARY KEY   AUTOINCREMENT, label TEXT, timestamp REAL)",[]).then(
+					function success (result) {
+						console.log(result);
+					},
+					function error (error) {
+						console.error("errr");
+						console.log(error);
+					}
+				); */
+				db.execute("INSERT INTO file_manage (label, timestamp) VALUES (?, ?)",["Test~!#$%^&*()_+}{+*Upoo-#oikl.-aa#äääääpü+", new Date()]);
+				db.queryAll("SELECT label FROM file_manage ",[]).then(function (result) {
+					console.log(result);
+				});
+				
+			});
+		</script>
+	</body>
+</html>
