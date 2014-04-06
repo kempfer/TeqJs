@@ -11,12 +11,16 @@
 		<script type="text/javascript"  src="plugins/TeqString.js"></script>		
 		<script type="text/javascript"  src="plugins/TeqWebSql.js"></script>		
 		<script type="text/javascript"  src="plugins/TeqPromise.js"></script>
+		<script type="text/javascript"  src="plugins/TeqClass.js"></script>		
+		
+		<script type="text/javascript"  src="plugins/TeqDefine.js"></script>	
+		<script type="text/javascript"  src="atom-full-compiled.js"></script>		
 	</head>
 	<body>
 		<script>
 			t.dom.onReady(function () {
 				
-				var db = t.webSql({name : "local_cloud"});
+				//var db = t.webSql({name : "local_cloud"});
 				/*db.execute("CREATE TABLE file_manage (id INTEGER PRIMARY KEY   AUTOINCREMENT, label TEXT, timestamp REAL)",[]).then(
 					function success (result) {
 						console.log(result);
@@ -26,11 +30,31 @@
 						console.log(error);
 					}
 				); */
-				db.execute("INSERT INTO file_manage (label, timestamp) VALUES (?, ?)",["Test~!#$%^&*()_+}{+*Upoo-#oikl.-aa#äääääpü+", new Date()]);
-				db.queryAll("SELECT label FROM file_manage ",[]).then(function (result) {
+				//db.execute("INSERT INTO file_manage (label, timestamp) VALUES (?, ?)",["Test~!#$%^&*()_+}{+*Upoo-#oikl.-aa#äääääpü+", new Date()]);
+				/*db.queryAll("SELECT label FROM file_manage ",[]).then(function (result) {
 					console.log(result);
-				});
+				});*/
+				var a  = atom.Class({methodA : function (a) {console.log(a)}});
+				var b = atom.Class({ methodB : function (a) {console.log(a)}, Extends : a});
+				var c = atom.Class({Implements : [b]});
+				var d = new c;				
 				
+				var start = new Date().getTime();
+				for(var i = 0; i < 10000; i++) {
+					var d = atom.declare("test",{methodA : function (a) {console.log(a)}});
+					//t.Class.define("TeqLocal.test",{medhodA : function (a) {console.log(a)}})
+	
+					//var c = new TeqLocal.test();
+					
+					//var a  = atom.Class({methodA : function (a) {console.log(a)}});
+					//var b = t.Class({ methodB : function (a) {console.log(a)}});
+					//var c = t.Class({Implements : [b]});
+					//var d = new c;*/
+				}
+				console.log((new Date().getTime() - start) / 1000);
+				
+				console.log(d);
+				//c.a("aa");
 			});
 		</script>
 	</body>

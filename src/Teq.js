@@ -157,8 +157,8 @@ var Teq = {
 	*
 	*
 	**/
-	expand : function (name,object) {
-
+	expand : function (elem, from) {
+		
 	},
 	/**
 	*
@@ -166,6 +166,13 @@ var Teq = {
 	**/
 	append : function (name,object) {
 
-	}	
+	},
+	globalScope : (typeof window === 'undefined') ? this : window,
+	
+	lambdaFunc : function (value) { 
+		return function () { 
+			return value; 
+		}
+	},
 };
 window.t = Teq;
