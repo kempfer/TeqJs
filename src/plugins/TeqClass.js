@@ -1,3 +1,60 @@
+// accessors 
+(function () {
+	var define = function (object, property, accessors) {	
+		if (accessors) {
+			if (accessors.getter) {
+				object.__defineGetter__(property, accessors.getter);
+			}
+			if (accessors.setter){
+				 object.__defineSetter__(property, accessors.setter);
+			}
+		}
+		return object;
+	},
+	Accessors = {
+		lookup : function (object, key) {
+			var getter, setter;
+			getter = object.__lookupGetter__(key);
+			setter = object.__lookupSetter__(key);
+			return !!(getter || setter);
+		},
+		find : function (object, key) {
+			if(t.accessors.lookup(object, key)){
+				return {
+					getter : object.__lookupGetter__(key),
+					setter : object.__lookupSetter__(key)
+				}
+			}
+			return null;
+		},
+		define : function (object, property, accessors) {
+			if (typeof property == 'object') {
+				for (var i in property){
+					define(object, i, property[i]);
+				} 
+			} 
+			else {
+				define(object, property, accessors);
+			}
+			return object;
+		},
+		has: function (object, key) {
+			return t.accessors.lookup(object, key);
+		},
+		inherit: function (object, to, key) {
+			var is = t.accessors.find(object, key);			
+			if ( is ) {
+				t.accessors.define(to, key, is);
+				return true;
+			}
+			return false;
+		}
+	}
+	
+	
+	t.accessors = Accessors;
+})();
+
 (function () {
 	'use strict';
 	
@@ -208,9 +265,9 @@
 		invoke : function (){
 			return this.factory( arguments );
 		},
-		factory : function (args) {
-			factory = true;
-			return new this(args);
+		factory : function () {
+			factory = true;			
+			return new this(arguments);
 		}
 	},
 	construct = function (Constructor, args){
@@ -252,7 +309,7 @@
 			Constructor.prototype.constructor = Constructor;			
 			define(name, Constructor);			
 		},
-		create : function (name,object) {
+		create : function (object) { 
 			var Constructor;
 			Constructor = function (){
 				return construct.call(this, Constructor, arguments);

@@ -11,13 +11,11 @@
 		<script type="text/javascript"  src="plugins/TeqString.js"></script>		
 		<script type="text/javascript"  src="plugins/TeqWebSql.js"></script>		
 		<script type="text/javascript"  src="plugins/TeqPromise.js"></script>
-		<script type="text/javascript"  src="plugins/TeqClass.js"></script>		
-		
-		<script type="text/javascript"  src="plugins/TeqDefine.js"></script>	
-		<script type="text/javascript"  src="atom-full-compiled.js"></script>		
+		<script type="text/javascript"  src="plugins/TeqClass.js"></script>								
 	</head>
 	<body>
 		<script>
+			var Tom;
 			t.dom.onReady(function () {
 				
 				//var db = t.webSql({name : "local_cloud"});
@@ -34,27 +32,28 @@
 				/*db.queryAll("SELECT label FROM file_manage ",[]).then(function (result) {
 					console.log(result);
 				});*/
-				var a  = atom.Class({methodA : function (a) {console.log(a)}});
-				var b = atom.Class({ methodB : function (a) {console.log(a)}, Extends : a});
-				var c = atom.Class({Implements : [b]});
-				var d = new c;				
 				
-				var start = new Date().getTime();
-				for(var i = 0; i < 10000; i++) {
-					var d = atom.declare("test",{methodA : function (a) {console.log(a)}});
-					//t.Class.define("TeqLocal.test",{medhodA : function (a) {console.log(a)}})
-	
-					//var c = new TeqLocal.test();
-					
-					//var a  = atom.Class({methodA : function (a) {console.log(a)}});
-					//var b = t.Class({ methodB : function (a) {console.log(a)}});
-					//var c = t.Class({Implements : [b]});
-					//var d = new c;*/
-				}
-				console.log((new Date().getTime() - start) / 1000);
-				
-				console.log(d);
 				//c.a("aa");
+				var start = new Date().getTime();
+				for (var i = 0; i < 10000; i++){
+					var Animal = t.Class.create("Animal",{
+						init : function (name,age) {
+							this._name = name;
+							this._age = age;
+						},
+						get name () {
+							return this._name;
+						},
+						get age () {
+							return this._age;
+						}
+					});
+					var cat = t.Class.create("cat",{
+						Extend : Animal
+					});
+					Tom = cat.factory("Tom", 15);
+				}	
+				console.log(( new Date().getTime() - start)/1000);
 			});
 		</script>
 	</body>
