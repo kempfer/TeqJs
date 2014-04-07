@@ -69,10 +69,10 @@
 		},
         execute : function (sql,params) {            
             params = params || [];			
-            return new Promise(function (resolve,reject) { 					
+            return new t.promise(function (resolve,reject) { 					
                 this.db.transaction(function(tx) {					
                     tx.executeSql(sql,params,
-                    function successExecute  (tx,result) {							
+                    function successExecute  (tx,result) {									
                         resolve(result);
                     },
                     function errorExecute (tx, error) {						
@@ -83,7 +83,7 @@
             }.bind(this));
         },
         queryAll : function (sql, params) {
-            return new Promise(function (resolve,reject) { 
+            return t.promise(function (resolve,reject) { 
 				this.execute(sql, params).then(
 					function   (result) {						
 						resolve(toASSOC(result));
@@ -95,7 +95,7 @@
             }.bind(this));
         },
         queryRow : function (sql, params) {
-			return new Promise(function (resolve,reject) { 
+			return t.promise(function (resolve,reject) { 
 				this.execute(sql, params).then(
 					function   (result) {	
 						var response = 	toASSOC(result);				
@@ -114,7 +114,7 @@
 			}.bind(this));
         },
         queryScalar : function (sql, params) {
-			return new Promise(function (resolve,reject) { 
+			return t.promise(function (resolve,reject) { 
 				this.execute(sql, params).then(
 					function   (result) {								
 						resolve(toColumn(result));
@@ -126,7 +126,7 @@
 			}.bind(this));
         },
         queryColumn : function (sql, params) {
-			return new Promise(function (resolve,reject) { 
+			return t.promise(function (resolve,reject) { 
 				this.execute(sql, params).then(
 					function   (result) {									
 						resolve(toColumn(result)[0]);
