@@ -51,7 +51,7 @@
 					});
 					t.Class.define('cat',{
 						Extend : Animal,
-						Implements : t.Base.Class.Event,
+						Implements : [t.Base.Class.Event],
 						
 						setAge : function (age) {
 							this._age = age;
