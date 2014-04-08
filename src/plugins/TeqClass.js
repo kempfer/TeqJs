@@ -77,12 +77,12 @@
 			'[object RegExp]' 	: 'regexp',
 			'[object TeqClass]'	: 'teqclass'
 		};
-		var string = toString.call(item);
-		for (var i in typeOf.types){
-			if (i == string) {
+		var string = toString.call(item);		
+		for (var i in types){
+			if (i == string) {								
 				return types[i];
 			}
-		}
+		}		
 		return typeof item;
 		
 	},
@@ -93,7 +93,7 @@
 				length = array.length,
 				newArray = new Array(length);
 				while(length--){
-					newArray[length] = clone(array[i]);
+					newArray[length] = clone(array[length]);
 				}
 				return newArray;
 			},
@@ -116,7 +116,7 @@
 				
 			}
 		};
-		var type = typeOf(object);
+		var type = typeOf(object);		
 		return type in cloneTypes ? cloneTypes[type](object) : object;
 	},
 	extend = function (elem, from) {		
@@ -231,7 +231,7 @@
 			}
 			return this;
 		},
-		implement : function (name, fn,retain) {
+		implement : function (name, fn,retain) {			
 			if (typeof name == 'string') {
 				var params = {};
 				params[name] = fn;
@@ -255,7 +255,7 @@
 						} 										
 						this.prototype[key] = (retain) ? value : wrap(this, key, value);
 					}
-					else{
+					else{						
 						this.prototype[key] = clone(value);
 					}
 				}
@@ -306,7 +306,8 @@
 				return construct.call(this, Constructor, arguments);
 			};						
 			Constructor = prepapreClass(Constructor,object);			
-			Constructor.prototype.constructor = Constructor;			
+			Constructor.prototype.constructor = Constructor;		
+			Constructor.prototype.PATH = name;
 			define(name, Constructor);			
 		},
 		create : function (object) { 
