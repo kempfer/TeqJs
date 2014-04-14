@@ -34,11 +34,10 @@ t.Class.define("t.data.ModelWebSlq",{
 	add : function (values) {
 		var query, keys;		
 		return new t.promise(function (resolve,reject) { 
-			delete values[this.getPKName()];			
-			this.setAttributes(values);
+			delete values[this.getPKName()];						
 			try {				
-				if(this.validation()){
-					keys = Object.keys(this.__data);
+				if(this.validation(values)){
+					keys = Object.keys(values);
 					query = "INSERT INTO " + this.getTableName() + "(" + keys.join(", ") + ")";
 					query+= " VALUES ( ";
 					for(var i = 0; i < keys.length; i++){
@@ -50,7 +49,7 @@ t.Class.define("t.data.ModelWebSlq",{
 						}
 					}					
 					query+=") ";					
-					this.getDBConnect().execute(query,t.object.values(this.__data)).then(
+					this.getDBConnect().execute(query,t.object.values(values)).then(
 						function success (result) {							
 							resolve(result.insertId);
 						},
@@ -60,9 +59,8 @@ t.Class.define("t.data.ModelWebSlq",{
 					);
 				}
 			}
-			catch(e){
-				console.log(e);
-				reject(e);
+			catch(e){				
+				reject(e.message);
 			}		
 		}.bind(this));
 		
@@ -82,7 +80,7 @@ t.Class.define("t.data.ModelWebSlq",{
 				);
 			}
 			catch(e){
-				reject(e);
+				reject(e.message);
 			}
 		}.bind(this));
 		
@@ -114,7 +112,7 @@ t.Class.define("t.data.ModelWebSlq",{
 				);
 			}
 			catch(e){
-				reject(e)
+				reject(e.message);
 			}
 		}.bind(this));
 	},
@@ -133,7 +131,7 @@ t.Class.define("t.data.ModelWebSlq",{
 				);
 			}
 			catch(e){
-				reject(e)
+				reject(e.message);
 			}
 		}.bind(this));
 	},
@@ -182,10 +180,22 @@ t.Class.define("t.data.ModelWebSlq",{
 	loadRecord : function (values) {
 		if(t.isEmpty(values)){
 			return false;
-		}		
-		var model = new window[this.PATH]();
+		}		        
+		var model = this.getInstance();        
 		model.setAttributes(values);
 		model.__pk = values[model.getPKName()];		
 		return model;
-	}
+	},
+    getInstance : function () {
+        var key, part, target = window;
+        path = this.PATH;
+		path = path.split('.');
+		key  = path.pop();
+		while (path.length) {
+			part = path.shift();			
+			target = target[part];
+			
+		}
+		return new target[key]();
+    }
 });

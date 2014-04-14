@@ -88,7 +88,7 @@ t.Class.define('t.Base.Class.Event',{
 			return false;
 		}
 		var args = Array.prototype.slice.call(arguments, 1);
-		if(typeof handler == "function"){
+		if(typeof handler == "function"){            
 			handler.apply(this, args);
 		}
 		else if (t.isArray(handler)) {

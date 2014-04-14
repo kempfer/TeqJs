@@ -132,13 +132,13 @@
 	callParent = function(){			
 		var name, parent, previous;
 		if(!this.$caller){
-			throw new Error('The method «parent» cannot be called.');
+			throw new Error('The method ï¿½parentï¿½ cannot be called.');
 		}
 		name    = this.$caller.$name;
 		parent   = this.$caller.$owner.parent;
 		previous = parent && parent.prototype[name];
 		if(!previous){
-			throw new Error('The method «' + name + '» has no parent.');
+			throw new Error('The method ï¿½' + name + 'ï¿½ has no parent.');
 		}
 		return previous.apply(this, arguments);
 	},
@@ -158,7 +158,7 @@
 				 throw new TypeError('Context lost');
 			}
 			if (method.$protected && !this.$caller){
-				throw new Error('The method «' + key + '» is protected.');
+				throw new Error('The method ï¿½' + key + 'ï¿½ is protected.');
 			}			
 			var current = this.$caller;
 			this.$caller = wrapper;

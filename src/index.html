@@ -66,14 +66,34 @@
 								last_action_id INTEGER,\n\
 								hash TEXT,\n\
 								updated INTEGER)";							 
-						}					
+						},
+					    findByExternalId : function (externalId) {
+							var query, values;
+							return new t.promise(function (resolve,reject) {
+								try {
+									query = "SELECT * FROM " + this.getTableName() + " WHERE  external_id = ? LIMIT 1";
+									this.getDBConnect().queryRow(query,[externalId]).then(
+										function success(result) {						
+											resolve(result);
+										},
+										function error (error) {
+											reject(error);
+										}
+									);
+								}
+								catch(e){
+									reject(e);
+								}
+							}.bind(this));
+						}
 					});
 					model = new FilemanagerModel();
 					var data = {external_id: 11,name : "test",local_path : "c:\zzz\a.pdf",parent_id : 0, type : 1, last_action_id : 123,hash : "sdsdfsdf",updated :1};
 					//model.add(data).then(function (a) {console.log(a)} , function (a) {console.error(a)});
-					model.findByPK(6).then(function (result) {						
+					var start = new Date().getTime();
+					model.findByExternalId(18).then(function (result) {						
 						test = model.loadRecord(result);
-						console.log(test);
+						console.log((new Date().getTime() - start) / 1000);
 					},
 					function (error) {
 						console.log(error);
