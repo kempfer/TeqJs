@@ -96,6 +96,27 @@ var Teq = {
 	*
 	*
 	**/
+	isString : function (v) {
+		return typeof v === "string";
+	},
+	/**
+	*
+	*
+	**/
+	isBoolean : function (v) {
+		return typeof v === "boolean";
+	},
+	/**
+	*
+	*
+	**/
+	isNumber : function (v) {
+		return typeof v === "number" && isFinite(v);
+	},
+	/**
+	*
+	*
+	**/
 	isset : function () {
 		if (arguments.length === 0){
 			return false;

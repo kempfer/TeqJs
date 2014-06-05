@@ -15,10 +15,21 @@
 		<script type="text/javascript"  src="plugins/TeqBasesClass.js"></script>		
 		<script type="text/javascript"  src="plugins/TeqModelWebSql.js"></script>		
 		<script type="text/javascript"  src="plugins/TeqUri.js"></script>	
+		<script type="text/javascript"  src="plugins/TeqValidator.js"></script>	
 	</head>
 	<body>
 		<script>
-			console.log(t.uri());
+			var test = t.validator(
+				{
+					name: "5",
+					email : "",
+				},
+				{
+					name : "required|max:10|min:6|in:4,7,8,9,5|notIn:4,7,8,9",
+					email : "required|email",
+					firstName : "requiredIf:name,5"
+				}				
+			);
 			/*var model;
 			var test;
 			t.dom.onReady(function () {
