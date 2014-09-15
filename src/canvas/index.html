@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Teq Local Cloud</title>
+		<script type="text/javascript"  src="../Teq.js"></script>		
+		<script type="text/javascript"  src="../plugins/TeqArray.js"></script>
+		<script type="text/javascript"  src="../plugins/TeqDom.js"></script>
+		<script type="text/javascript"  src="../plugins/TeqNumber.js"></script>
+		<script type="text/javascript"  src="../plugins/TeqObject.js"></script>
+		<script type="text/javascript"  src="../plugins/TeqString.js"></script>		
+
+		<script type="text/javascript"  src="../plugins/TeqClass.js"></script>								
+		<script type="text/javascript"  src="../plugins/TeqBasesClass.js"></script>	
+		<script type="text/javascript"  src="TCanvas.js"></script>		
+		<script type="text/javascript"  src="TCanvasObj.js"></script>	
+		<script type="text/javascript"  src="TCanvasRect.js"></script>	
+
+	</head>
+	<body>
+		<canvas id="canvas"> </canvas>
+		<div id="test"> </div>
+		<script>
+			var canvas;
+			var rect;
+			var rect2;
+			t.dom.onReady(function () {
+				 canvas = new t.canvas('#canvas');
+				console.log(canvas.width);
+				canvas.renderTo("#test");
+				 rect = new t.canvas.rect({});
+				rect2 = new t.canvas.rect({width:50,x:20,y:100});
+				canvas.add(rect,rect2);
+				canvas.renderAll();
+			});
+			
+		</script>
+	</body>
+</html>
