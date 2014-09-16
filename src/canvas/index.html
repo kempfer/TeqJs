@@ -15,28 +15,48 @@
 		<script type="text/javascript"  src="TCanvas.js"></script>		
 		<script type="text/javascript"  src="TCanvasObj.js"></script>	
 		<script type="text/javascript"  src="TCanvasRect.js"></script>	
-
+		<script type="text/javascript"  src="TCanvasCircle.js"></script>
+		<script type="text/javascript"  src="TCanvasTriangle.js"></script>
 	</head>
 	<body>
-		<canvas id="canvas"> </canvas>
+		<canvas id="canvas" style="border: 1px solid;"> </canvas>
 		<div id="test"> </div>
 		<script>
 			var canvas;
 			var rect;
 			var rect2;
+			var circle;
+			var triangle;
 			t.dom.onReady(function () {
-				canvas = new t.canvas('#canvas');				
+				canvas = new t.canvas('#canvas');	
+				//canvas.width = 400;			
+				//canvas.height = 400;				
 				canvas.renderTo("#test");
-				rect = new t.canvas.rect({x:10,y:10});
+				rect = new t.canvas.rect({x:10,y:10,angle:45});
 				rect2 = new t.canvas.rect({
 					width:50,
 					x:20,
 					y:100,
+					angle:0,
 					fill:'red',
 					strokeStyle : 'blue',
 					strokeWidth : 5
 				});
-				canvas.add(rect,rect2);
+				circle = new t.canvas.circle({
+					fill : 'green',
+					x : 70,
+					y: 50,
+					strokeStyle : 'blue',
+					radius : 20,
+					strokeWidth : 3,
+					opacity: 0.1
+				});
+				triangle = new t.canvas.triangle({
+					x: 100,
+					y: 100,
+					angle:90
+				});
+				canvas.add(rect,rect2,circle,triangle);
 				canvas.renderAll();
 			});
 			

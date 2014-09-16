@@ -60,12 +60,13 @@ t.Class.define('t.canvas',{
 	}
 
 });
+
 /** @private */
 
 t.canvas.buffer =  function (width,height) {
 	return t.dom.create('canvas',{width: width, height:height}).first.getContext('2d');
 };
 
-t.canvas.inRad = function (num) {
+t.canvas.degree = function (num) {
 	return Math.PI / 180 * num ;
 }
