@@ -25,20 +25,19 @@ t.Class.define('t.canvas.object', {
 	}, 
 	render : function (ctx) {
 		var ctx = ctx || t.canvas.buffer();
+		ctx.save();
 		ctx.fillStyle = this.getFill();
+		ctx.strokeStyle = this.getStrokeStyle();
 		this._render(ctx);
 		ctx.restore();
-		return ctx;
 	}
 });
 t.canvas.object.options = {
 	x : 0,
-	y : 0,
-	width: 20,
-	height: 20,
+	y : 0,	
 	fill : 'red',
 	angle : 0,
-	stroke : false,
+	strokeStyle : false,
 	strokeWidth : 1,
 	scaleX : 1,
 	scaleY : 1,

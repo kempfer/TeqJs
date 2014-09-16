@@ -46,11 +46,14 @@ t.Class.define('t.canvas',{
 		
 	},
 	renderAll : function () {
+		console.time('renderAll'); 
 		this.clear();
-		var ctx;
+		var buffer = t.canvas.buffer(this.width,this.height);
 		for(var key in this.objects) {
-			ctx = this.objects[key].render(this._ctx);
-		}
+			this.objects[key].render(buffer);
+		}		
+		this._ctx.drawImage(buffer.canvas, 0, 0);
+		console.timeEnd('renderAll');
 	},
 	clear : function () {
 		this.context.clearRect ( 0 , 0 , this.width , this.height );
@@ -62,3 +65,7 @@ t.Class.define('t.canvas',{
 t.canvas.buffer =  function (width,height) {
 	return t.dom.create('canvas',{width: width, height:height}).first.getContext('2d');
 };
+
+t.canvas.inRad = function (num) {
+	return Math.PI / 180 * num ;
+}

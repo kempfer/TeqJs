@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Teq Local Cloud</title>
+		<title>Teq Canvas Lib</title>
 		<script type="text/javascript"  src="../Teq.js"></script>		
 		<script type="text/javascript"  src="../plugins/TeqArray.js"></script>
 		<script type="text/javascript"  src="../plugins/TeqDom.js"></script>
@@ -25,11 +25,17 @@
 			var rect;
 			var rect2;
 			t.dom.onReady(function () {
-				 canvas = new t.canvas('#canvas');
-				console.log(canvas.width);
+				canvas = new t.canvas('#canvas');				
 				canvas.renderTo("#test");
-				 rect = new t.canvas.rect({});
-				rect2 = new t.canvas.rect({width:50,x:20,y:100});
+				rect = new t.canvas.rect({x:10,y:10});
+				rect2 = new t.canvas.rect({
+					width:50,
+					x:20,
+					y:100,
+					fill:'red',
+					strokeStyle : 'blue',
+					strokeWidth : 5
+				});
 				canvas.add(rect,rect2);
 				canvas.renderAll();
 			});
