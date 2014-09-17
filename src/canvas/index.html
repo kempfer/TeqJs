@@ -17,6 +17,7 @@
 		<script type="text/javascript"  src="TCanvasRect.js"></script>	
 		<script type="text/javascript"  src="TCanvasCircle.js"></script>
 		<script type="text/javascript"  src="TCanvasTriangle.js"></script>
+		<script type="text/javascript"  src="TCanvasEllipse.js"></script>
 	</head>
 	<body>
 		<canvas id="canvas" style="border: 1px solid;"> </canvas>
@@ -27,6 +28,8 @@
 			var rect2;
 			var circle;
 			var triangle;
+			var ellipse;
+			var circle2;
 			t.dom.onReady(function () {
 				canvas = new t.canvas('#canvas');	
 				//canvas.width = 400;			
@@ -54,9 +57,26 @@
 				triangle = new t.canvas.triangle({
 					x: 100,
 					y: 100,
-					angle:90
+					angle:0,
+					strokeStyle : 'blue',
+					strokeWidth : 5
 				});
-				canvas.add(rect,rect2,circle,triangle);
+				ellipse = new t.canvas.ellipse({
+					x: 170,
+					y: 100,
+					xRadius: 40,
+					yRadius: 20,
+					angle:45,
+					strokeStyle : 'blue',
+					strokeWidth : 5,
+					end : 270
+				});
+				circle2 = new  t.canvas.circle({
+					x: 170,
+					y: 100,
+					fill:'#000'
+				});
+				canvas.add(rect,rect2,circle,triangle,ellipse,circle2);
 				canvas.renderAll();
 			});
 			

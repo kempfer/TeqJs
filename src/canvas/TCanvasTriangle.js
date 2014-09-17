@@ -16,12 +16,12 @@ t.Class.define('t.canvas.triangle', {
 	},
 	_render : function (ctx) {	
 		this._counted();
-		var widthBy2 = this.getWidth() / 2,
-			heightBy2 = this.getHeight() / 2;
+		var widthByTo = this.getWidth() / 2,
+			heightByTo = this.getHeight() / 2;
 	    ctx.beginPath();
-	    ctx.moveTo(this._x , this._y - heightBy2);
-	    ctx.lineTo(this._x + widthBy2, this._y  + heightBy2);
-	    ctx.lineTo(this._x - widthBy2, this._y  + heightBy2);
+	    ctx.moveTo(this._x , this._y - heightByTo);
+	    ctx.lineTo(this._x + widthByTo, this._y  + heightByTo);
+	    ctx.lineTo(this._x - widthByTo, this._y  + heightByTo);
 	    ctx.closePath();
 		this._renderFill(ctx);
 		this._renderStroke(ctx);

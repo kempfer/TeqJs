@@ -14,9 +14,10 @@ t.Class.define('t.canvas.circle', {
 		this._counted();
 		ctx.beginPath();
 		ctx.arc(this._x ,this._y,this.getRadius(),0,2 * Math.PI, false);
+		ctx.closePath();
 		this._renderFill(ctx);
 		this._renderStroke(ctx);
-		ctx.closePath();
+		
 	},
 	_counted : function () {
 		this._x = this.getX();
