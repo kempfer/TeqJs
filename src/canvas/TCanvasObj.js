@@ -54,13 +54,13 @@ t.Class.define('t.canvas.object', {
 t.canvas.object.options = {
 	x : 0,
 	y : 0,	
-	fill : 'red',
+	fill : '#000000',
 	angle : false,
 	strokeStyle : false,
 	strokeWidth : 1,
 	scaleX : 1,
 	scaleY : 1,
-	flipX : 0,
-	flipY : 0,
+	flipX : false,
+	flipY : false,
 	opacity: 1
 }

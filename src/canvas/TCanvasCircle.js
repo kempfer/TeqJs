@@ -13,7 +13,14 @@ t.Class.define('t.canvas.circle', {
 	_render : function (ctx) {	
 		this._counted();
 		ctx.beginPath();
-		ctx.arc(this._x ,this._y,this.getRadius(),0,2 * Math.PI, false);
+		ctx.arc(
+			this._x ,
+			this._y,
+			this.getRadius(),
+			t.canvas.degree(this.getStart()),
+			t.canvas.degree(this.getEnd()),
+			false
+		);
 		ctx.closePath();
 		this._renderFill(ctx);
 		this._renderStroke(ctx);
@@ -27,5 +34,7 @@ t.Class.define('t.canvas.circle', {
 
 
 t.canvas.circle.options = t.combine (t.canvas.object.options, {
-	radius: 5
+	radius: 5,
+	start: 0,
+	end : 360
 });
