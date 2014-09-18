@@ -8,8 +8,7 @@
 		<script type="text/javascript"  src="../plugins/TeqDom.js"></script>
 		<script type="text/javascript"  src="../plugins/TeqNumber.js"></script>
 		<script type="text/javascript"  src="../plugins/TeqObject.js"></script>
-		<script type="text/javascript"  src="../plugins/TeqString.js"></script>		
-
+		<script type="text/javascript"  src="../plugins/TeqString.js"></script>	
 		<script type="text/javascript"  src="../plugins/TeqClass.js"></script>								
 		<script type="text/javascript"  src="../plugins/TeqBasesClass.js"></script>	
 		<script type="text/javascript"  src="TCanvas.js"></script>		
@@ -18,6 +17,8 @@
 		<script type="text/javascript"  src="TCanvasCircle.js"></script>
 		<script type="text/javascript"  src="TCanvasTriangle.js"></script>
 		<script type="text/javascript"  src="TCanvasEllipse.js"></script>
+		<script type="text/javascript"  src="TCanvasLine.js"></script>
+		
 	</head>
 	<body>
 		<canvas id="canvas" style="border: 1px solid;"> </canvas>
@@ -30,6 +31,7 @@
 			var triangle;
 			var ellipse;
 			var circle2;
+			var line; 
 			t.dom.onReady(function () {
 				canvas = new t.canvas('#canvas');	
 				//canvas.width = 400;			
@@ -77,7 +79,14 @@
 					y: 100,
 					fill:'#000'
 				});
-				canvas.add(rect,rect2,circle,triangle,ellipse,circle2);
+				line = new t.canvas.line({
+					x : 170,
+					y : 30,
+					x2 : 200,
+					y2: 30,
+					angle:-10
+				});
+				canvas.add(rect,rect2,circle,triangle,ellipse,circle2,line);
 				canvas.renderAll();
 			});
 			
