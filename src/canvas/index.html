@@ -20,6 +20,7 @@
 		<script type="text/javascript"  src="TCanvasEllipse.js"></script>
 		<script type="text/javascript"  src="TCanvasLine.js"></script>
 		<script type="text/javascript"  src="TCanvasImage.js"></script>
+		<script type="text/javascript"  src="TCanvasPolygon.js"></script>
 		
 	</head>
 	<body>
@@ -35,6 +36,7 @@
 			var circle2;
 			var line; 
 			var image;
+			var polygon;
 			t.dom.onReady(function () {
 				canvas = new t.canvas('#canvas');	
 				canvas.width = 400;			
@@ -94,7 +96,18 @@
 					y : 30,     
 					angle:45
 				});
-				canvas.add(rect,rect2,circle,triangle,ellipse,circle2,line,image);
+				polygon = new t.canvas.polygon({
+					points : [
+						{x : 200,y : 200},
+						{x : 250,y : 210},
+						{x : 280,y : 150},	
+						{x : 250,y : 150}
+					],
+					strokeStyle : 'green',
+					strokeWidth : 5,
+					opacity: 0.2,
+				});
+				canvas.add(rect,rect2,circle,triangle,ellipse,circle2,line,image,polygon);
 				canvas.renderAll();
 			});
 			
