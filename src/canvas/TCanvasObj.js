@@ -7,7 +7,7 @@ t.Class.define('t.canvas.object', {
 		var self = this;
 		for(var i in this.options) {
 			this['get' + t.string.ucfirst(i)] = (function () {			
-				var key = i;			
+				var key = i;
 				return function(){ return self.option(key); };
 			})();
 		}
@@ -22,6 +22,7 @@ t.Class.define('t.canvas.object', {
 	}),
 	set : function (key,val) {
 		this.options[key] = val;
+		this.fire('change',key);
 		return this;
 	}, 
 	render : function (ctx) {
@@ -33,6 +34,7 @@ t.Class.define('t.canvas.object', {
 		this._transform(ctx);
 		this._render(ctx);
 		ctx.restore();
+		this.fire('render');
 	},
 	clone : function () {
 		return t.canvas[this.name].factory(this.options);

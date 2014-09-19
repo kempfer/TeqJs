@@ -1,8 +1,11 @@
 t.Class.define('t.Base.Class.Event',{
 	
-	$events : {},	
+	//$events : {},	
 	
 	on : function (name, fn){
+        if(!t.isObject(this.$events)){
+            this.$events = {};
+        }
 		if (!this.$events[name]) {
 			this.$events[name] = fn;
 		}
@@ -88,7 +91,7 @@ t.Class.define('t.Base.Class.Event',{
 			return false;
 		}
 		var args = Array.prototype.slice.call(arguments, 1);
-		if(typeof handler == "function"){            
+		if(typeof handler == "function"){  
 			handler.apply(this, args);
 		}
 		else if (t.isArray(handler)) {

@@ -97,7 +97,8 @@
 				image = new t.canvas.image({
 					x : 200,
 					y : 30,     
-					angle:45
+					//angle:45,
+					flipX : true
 				});
 				polygon = new t.canvas.polygon({
 					points : [
@@ -112,12 +113,20 @@
 				});
 				cloneRect = rect.clone();
 				cloneRect.set('x',50);
+				image.on('render', function () {
+					console.log('render ' + this.name);
+					console.log('render');
+				});
+				image.on('change', function (name) {
+					console.log('chnage -> ' + name);
+				});
 				canvas.add(rect,rect2,circle,triangle,ellipse,circle2,line,image,polygon,cloneRect);
 				canvas.renderAll();
-				
+
+			
 				canvas2 = t.dom("#canvas-2").first.getContext('2d');
 				cloneRect.renderTo(canvas2);
-				setInterval(function () {animal(line)},100);
+				//setInterval(function () {animal(image)},100);
 				//setInterval(function () {animal(line)},100);
 				//setInterval(function () {animal(circle)},100);
 				

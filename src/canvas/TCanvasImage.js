@@ -1,7 +1,7 @@
 t.Class.define('t.canvas.image', {
 	
 	Extend : t.canvas.object,
-	
+	name : '',
 	_img : null,
 	/**
 	* Constructor

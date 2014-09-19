@@ -77,7 +77,8 @@
 			'[object RegExp]' 	: 'regexp',
 			'[object TeqClass]'	: 'teqclass'
 		};
-		var string = toString.call(item);		
+		var string = item.toString();
+		//var string = toString.call(item);		
 		for (var i in types){
 			if (i == string) {								
 				return types[i];

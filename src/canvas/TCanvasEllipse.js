@@ -12,17 +12,21 @@ t.Class.define('t.canvas.ellipse',{
 	},
 	_render : function (ctx) {	
 		this._counted();		
-		var degree = t.canvas.degree(this.getAngle());
-		ctx.beginPath();		
-		ctx.ellipse(
-			this._x,
-			this._y, 
+		var degree, transform;
+		transform = !!this.getAngle();
+		degree = t.canvas.degree(this.getAngle());
+		ctx.beginPath();
+		ctx.save();	
+		ctx.transform(1, 0, 0, this.getYRadius()/this.getXRadius(), 0, 0);
+		ctx.arc(
+			transform ? 0 : this.getX() + this.getYRadius(),
+			transform ? 0 : (this.getY() + this.getYRadius()) * this.getXRadius()/this.getYRadius(), 
 			this.getXRadius(),
-			this.getYRadius(),
-			degree,
-			t.canvas.degree(this.getStart()),
-			t.canvas.degree(this.getEnd())
-		);		
+			t.canvas.degree(this.getStart()), 
+			t.canvas.degree(this.getEnd()), 
+			false
+		);
+		ctx.restore();
 		this._renderFill(ctx);
 		this._renderStroke(ctx);
 		ctx.closePath();
@@ -31,7 +35,11 @@ t.Class.define('t.canvas.ellipse',{
 		this._x =  this.getX();
 		this._y =  this.getY();
 	},
-	_transform : function  () {
+	_transform : function  (ctx) {
+		ctx.translate(this.getX() , this.getY());
+		if(this.getAngle()) {
+			ctx.rotate(t.canvas.degree(this.getAngle()));
+		}
 	}
 });
 
