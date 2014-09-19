@@ -1,6 +1,7 @@
 t.Class.define('t.canvas.object', {
 
 	Implements : [t.Base.Class.Event],
+	
 	init : function (options) {
 		this.options = t.combine(this.defaultOptions,options);
 		var self = this;
@@ -32,6 +33,17 @@ t.Class.define('t.canvas.object', {
 		this._transform(ctx);
 		this._render(ctx);
 		ctx.restore();
+	},
+	clone : function () {
+		return t.canvas[this.name].factory(this.options);
+	},
+	renderTo : function  (ctx) {
+		if(ctx instanceof t.canvas) {
+			this.render(ctx.context);
+		}
+		else if(ctx instanceof CanvasRenderingContext2D){
+			this.render(ctx);
+		}
 	},
 	_renderFill : function (ctx) {
 		if(this.getFill()){

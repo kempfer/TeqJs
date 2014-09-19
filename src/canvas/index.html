@@ -26,8 +26,10 @@
 	<body>
 		<canvas id="canvas" style="border: 1px solid;"> </canvas>
 		<div id="test"> </div>
+		<canvas id="canvas-2" style="border: 1px solid;"> </canvas>
 		<script>
 			var canvas;
+			var canvas2;
 			var rect;
 			var rect2;
 			var circle;
@@ -37,6 +39,7 @@
 			var line; 
 			var image;
 			var polygon;
+			var cloneRect;
 			t.dom.onReady(function () {
 				canvas = new t.canvas('#canvas');	
 				canvas.width = 400;			
@@ -107,9 +110,27 @@
 					strokeWidth : 5,
 					opacity: 0.2,
 				});
-				canvas.add(rect,rect2,circle,triangle,ellipse,circle2,line,image,polygon);
+				cloneRect = rect.clone();
+				cloneRect.set('x',50);
+				canvas.add(rect,rect2,circle,triangle,ellipse,circle2,line,image,polygon,cloneRect);
 				canvas.renderAll();
+				
+				canvas2 = t.dom("#canvas-2").first.getContext('2d');
+				cloneRect.renderTo(canvas2);
+				setInterval(function () {animal(line)},100);
+				//setInterval(function () {animal(line)},100);
+				//setInterval(function () {animal(circle)},100);
+				
 			});
+			var angle = 0;
+			function animal (obj) {
+				if(angle == 360 ) {
+					angle = 0;
+				}
+				angle++;
+				obj.set('angle',angle);
+				canvas.renderAll();
+			}
 			
 		</script>
 	</body>

@@ -301,13 +301,15 @@
 	},
 	TeqClass = {
 		define : function (name,object) {
-			var Constructor;
+			var Constructor, arrayPath;
 			Constructor = function (){
 				return construct.call(this, Constructor, arguments);
 			};						
 			Constructor = prepapreClass(Constructor,object);			
 			Constructor.prototype.constructor = Constructor;		
 			Constructor.prototype.PATH = name;
+			arrayPath = name.split('.');
+			Constructor.prototype.name = arrayPath[arrayPath.length - 1];
 			define(name, Constructor);			
 		},
 		create : function (object) { 

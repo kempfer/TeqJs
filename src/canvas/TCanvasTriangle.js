@@ -5,6 +5,7 @@ t.Class.define('t.canvas.triangle', {
 	_x : 0,
 	
 	_y : 0,
+	
 	/**
 	* Constructor
 	* @param {Object} [options] Options object
@@ -19,12 +20,19 @@ t.Class.define('t.canvas.triangle', {
 		var widthByTo = this.getWidth() / 2,
 			heightByTo = this.getHeight() / 2;
 	    ctx.beginPath();
-	    ctx.moveTo(this._x , this._y - heightByTo);
-	    ctx.lineTo(this._x + widthByTo, this._y  + heightByTo);
-	    ctx.lineTo(this._x - widthByTo, this._y  + heightByTo);
+	    ctx.moveTo(-widthByTo , heightByTo);
+	    ctx.lineTo(0, - heightByTo);
+	    ctx.lineTo(widthByTo, heightByTo);
 	    ctx.closePath();
 		this._renderFill(ctx);
 		this._renderStroke(ctx);
+	},
+	_transform : function (ctx) {
+		ctx.translate(this.getX() , this.getY());
+		if(this.getAngle()) {
+			
+			ctx.rotate(t.canvas.degree(this.getAngle()));
+		}
 	},
 	_counted : function () {
 		this._x = (!this.getAngle()) ? this.getX() : - this.getWidth()/2;
