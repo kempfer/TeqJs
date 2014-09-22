@@ -12,6 +12,7 @@
 		<script type="text/javascript"  src="../plugins/TeqClass.js"></script>								
 		<script type="text/javascript"  src="../plugins/TeqBasesClass.js"></script>	
 		<script type="text/javascript"  src="../plugins/TeqPromise.js"></script>	
+		<script type="text/javascript"  src="../plugins/TeqAnimation.js"></script>
 		<script type="text/javascript"  src="TCanvas.js"></script>		
 		<script type="text/javascript"  src="TCanvasObj.js"></script>	
 		<script type="text/javascript"  src="TCanvasRect.js"></script>	
@@ -21,6 +22,7 @@
 		<script type="text/javascript"  src="TCanvasLine.js"></script>
 		<script type="text/javascript"  src="TCanvasImage.js"></script>
 		<script type="text/javascript"  src="TCanvasPolygon.js"></script>
+		
 		
 	</head>
 	<body>
@@ -45,7 +47,7 @@
 				canvas.width = 400;			
 				canvas.height = 400;				
 				canvas.renderTo("#test");
-				rect = new t.canvas.rect({x:10,y:10,angle:45});
+				rect = new t.canvas.rect({x:0,y:0, angle : 0});
 				rect2 = new t.canvas.rect({
 					width:50,
 					x:20,
@@ -120,12 +122,31 @@
 				image.on('change', function (name) {
 					console.log('chnage -> ' + name);
 				});
-				canvas.add(rect,rect2,circle,triangle,ellipse,circle2,line,image,polygon,cloneRect);
+				canvas.add(rect,rect2,circle,triangle,ellipse,circle2,line,polygon,cloneRect);
 				canvas.renderAll();
 
 			
 				canvas2 = t.dom("#canvas-2").first.getContext('2d');
 				cloneRect.renderTo(canvas2);
+				t.animation({
+					startValue : 100,
+					endValue : 300,
+					duration: 1000,
+					onChange : function (value) {
+						triangle.set('y',value);
+						canvas.renderAll();
+					}
+				});
+				/*t.animation({
+					startValue : 1,
+					endValue : 0,
+					duration: 1000,
+					onChange : function (value) {
+						console.log(value);
+						triangle.set('opacity',value);
+						canvas.renderAll();
+					}
+				});*/
 				//setInterval(function () {animal(image)},100);
 				//setInterval(function () {animal(line)},100);
 				//setInterval(function () {animal(circle)},100);
