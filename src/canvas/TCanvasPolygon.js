@@ -20,9 +20,23 @@ t.Class.define('t.canvas.polygon',{
 		this._renderFill(ctx);
 		this._renderStroke(ctx);
 	},
-	
+	_transform : function (ctx) {
+		var x =0,y=0,points;
+		points = this.getPoints();	
+		for(i = 0; i < points.length; i++){
+			x+=points[i].x;
+			y+=points[i].y;
+		}
+		x = x/points.length;
+		y = y/points.length;
+		if(this.getAngle()) {
+			ctx.translate(x , y);
+			ctx.rotate(t.canvas.degree(this.getAngle()));
+			ctx.translate(-x , -y);
+		}
+	},
 	_counted : function () {
-				
+	
 	}
 });
 

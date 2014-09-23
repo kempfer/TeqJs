@@ -60,7 +60,7 @@ t.Class.define('t.canvas.object', {
 	},
 	_transform : function (ctx) {
 		if(this.getAngle()) {
-			ctx.translate(this.getX() + this.getWidth()/2, this.getY() + this.getHeight()/2);
+			ctx.translate(this.getX(), this.getY());
 			ctx.rotate(t.canvas.degree(this.getAngle()));
 		}
 	}

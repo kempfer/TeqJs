@@ -1,6 +1,8 @@
 
 t.Class.define('t.canvas',{
 
+	Implements : [t.Base.Class.Event],
+	
 	_canvas : null,
 	_el : null,
 	_ctx : null,
@@ -43,20 +45,25 @@ t.Class.define('t.canvas',{
 			obj.id = t.uniqueId();
 			this.objects[obj.id] = obj;
 		}
-		
 	},
 	renderAll : function () {
-		console.time('renderAll'); 
+		//console.time('renderAll'); 
 		this.clear();
 		var buffer = this._ctx ;//t.canvas.buffer(this.width,this.height);
 		for(var key in this.objects) {
 			this.objects[key].render(buffer);
 		}		
 		//this._ctx.drawImage(buffer.canvas, 0, 0);
-		console.timeEnd('renderAll');
+		this.fire('renderAll');
+		//console.timeEnd('renderAll');
+		
 	},
 	clear : function () {
 		this.context.clearRect ( 0 , 0 , this.width , this.height );
+	},
+	toImage : function (type) {
+		type = type || "image/png";
+		return this._canvas.toDataURL(type);
 	}
 
 });

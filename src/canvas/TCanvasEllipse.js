@@ -12,9 +12,7 @@ t.Class.define('t.canvas.ellipse',{
 	},
 	_render : function (ctx) {	
 		this._counted();		
-		var degree, transform;
-		transform = !!this.getAngle();
-		degree = t.canvas.degree(this.getAngle());
+		var transform = !!this.getAngle();
 		ctx.beginPath();
 		ctx.save();	
 		ctx.transform(1, 0, 0, this.getYRadius()/this.getXRadius(), 0, 0);
@@ -23,7 +21,7 @@ t.Class.define('t.canvas.ellipse',{
 			transform ? 0 : (this.getY() + this.getYRadius()) * this.getXRadius()/this.getYRadius(), 
 			this.getXRadius(),
 			t.canvas.degree(this.getStart()), 
-			t.canvas.degree(this.getEnd()), 
+			t.canvas.degree(this.getEnd()),
 			false
 		);
 		ctx.restore();
@@ -34,12 +32,6 @@ t.Class.define('t.canvas.ellipse',{
 	_counted : function () {
 		this._x =  this.getX();
 		this._y =  this.getY();
-	},
-	_transform : function  (ctx) {
-		ctx.translate(this.getX() , this.getY());
-		if(this.getAngle()) {
-			ctx.rotate(t.canvas.degree(this.getAngle()));
-		}
 	}
 });
 
