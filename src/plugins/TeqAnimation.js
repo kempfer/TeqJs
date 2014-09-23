@@ -21,7 +21,43 @@
 		this.options = t.combine(TeqAnimation.defaultOptions,options);
 		this._abort = false;
 		this._stop = false;
-		this.start();
+		requestAnimFrame(function (timestamp) {				
+			var onStart,onChange,onComplete,
+				startTime, finishTime, onAbort, 
+				easing,duration,startValue,endValue,
+				byValue,start,finish,time,self,abort;
+			start = timestamp || +new Date();
+			duration = this.option('duration');
+			startValue = this.option('startValue');
+			endValue = this.option('endValue');
+			byValue = this.option('byValue') || endValue - startValue;
+			onStart = this.option('onStart');
+			onChange = this.option('onChange');
+			onComplete = this.option('onComplete');
+			onAbort = this.option('onAbort');
+			finishTime = start + duration;
+			easing = this.option('easing');
+			onStart.apply(this);
+			self = this;
+			abort = function () {return this._abort}.bind(this);
+			(function step (stepTime) {
+				var currentTime;
+				time = stepTime || +new Date();
+				if(abort()) {
+					onAbort.apply(self);
+					return;
+				}
+				//if(!this._stop){
+					currentTime = time > finishTime ? duration : (time - start);						
+					onChange.apply(self,[easing(currentTime, startValue, byValue, duration)]);
+				//}					
+				if (time > finishTime) {
+					onComplete.apply(self);
+					return;
+				}
+				requestAnimFrame(step);
+			})(start);
+		}.bind(this));
 	};
 	
 	TeqAnimation.prototype = {
@@ -36,48 +72,6 @@
 		}),
 		_abort : false,
 		_stop : false,
-		start : function () {
-			requestAnimFrame(function (timestamp) {
-				var onStart,onChange,onComplete,
-					startTime, finishTime, onAbort, 
-					easing,duration,startValue,endValue,
-					byValue,start,finish,time;
-				start = timestamp || +new Date();
-				duration = this.option('duration');
-				startValue = this.option('startValue');
-				endValue = this.option('endValue');
-				byValue = this.option('byValue') || endValue - startValue;
-				onStart = this.option('onStart');
-				onChange = this.option('onChange');
-				onComplete = this.option('onComplete');
-				finish = start + duration;
-				easing = this.option('easing');
-				onStart.apply(this);
-				(function step (stepTime) {
-					var currentTime,value;
-					time = stepTime || +new Date();
-					//if(this._abort) {
-					//	onAbort.apply(this);
-					//	return;
-					//}
-					//if(!this._stop){
-						currentTime = time > finishTime ? duration : (time - start);
-						onChange.apply(this,[easing(currentTime, startValue, byValue, duration)]);
-					//}
-					if (time > finish) {
-						onComplete.apply(this);
-						return;
-					}
-					//return;
-					requestAnimFrame(step);
-				})(start);
-			}.bind(this));
-	
-			//requestAnimFrame(step);
-		},
-		stop : function () {
-		
-		},
 		abort : function () {
 			this._abort = true;
 		}
@@ -99,4 +93,18 @@
 	
 	t.animation = TeqAnimation;
 	t.requestAnimFrame = requestAnimFrame;
+	if(t.dom){
+		t.dom.prototype.animation = function (params) {
+			this.each(function (elem) {
+				elem['animate'] = new t.animation(params);
+			});
+		};
+		t.dom.prototype.animationAbort = function () {
+			this.each(function (elem) {
+				if(elem['animate']){
+					elem['animate'].abort();
+				}				
+			});
+		}
+	}
 }(window.t, window));

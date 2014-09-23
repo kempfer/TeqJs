@@ -131,22 +131,33 @@
 				t.animation({
 					startValue : 100,
 					endValue : 300,
-					duration: 1000,
+					duration: 10000,
 					onChange : function (value) {
 						triangle.set('y',value);
 						canvas.renderAll();
-					}
+					},
+					onComplete : function () {
+						console.log('onComplete');
+					},
 				});
-				/*t.animation({
+				/*var anim = t.animation({
 					startValue : 1,
 					endValue : 0,
-					duration: 1000,
+					duration: 5000,
 					onChange : function (value) {
-						console.log(value);
 						triangle.set('opacity',value);
-						canvas.renderAll();
+						canvas.renderAll();						
+					},
+					onComplete : function () {
+						console.log('onComplete');
+					},
+					onAbort : function () {
+						console.log('onAbort');
 					}
 				});*/
+				setTimeout (function () {
+					console.log('setTimeout');
+				},10000);
 				//setInterval(function () {animal(image)},100);
 				//setInterval(function () {animal(line)},100);
 				//setInterval(function () {animal(circle)},100);
