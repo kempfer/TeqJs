@@ -1,11 +1,9 @@
 (function (t) {
 	'use strict';
+	
 	t.Class.define('t.canvas.rect',{
+	
 		Extend : t.canvas.object,
-		
-		_x : 0,
-		
-		_y : 0,
 		
 		init : function (options) {
 			this.defaultOptions = t.canvas.rect.options;

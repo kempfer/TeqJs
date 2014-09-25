@@ -82,7 +82,20 @@
 					y: c.y -5,
 					radius:5
 				});
-				canvas.add(circle,rect,circle2);
+				ellipse = new t.canvas.ellipse({
+					x: 120,
+					y: 100,
+					xRadius: 30,
+					yRadius: 15,
+					angle:0,
+					strokeStyle : 'blue',
+					strokeWidth : 5,
+					scaleX:1.2,
+					scaleY:1.2,
+					end : 270,
+					flipY:1
+				});
+				canvas.add(circle,rect,circle2,ellipse);
 				t.animation({
 					startValue : 0,
 					endValue : 360,
@@ -101,6 +114,18 @@
 					duration: 5000,
 					onChange : function (value) {
 						rect.set('angle',value);
+						canvas.renderAll();
+					},
+					onComplete : function () {
+						console.log('onComplete');
+					}
+				});
+				t.animation({
+					startValue : 0,
+					endValue : 360,
+					duration: 5000,
+					onChange : function (value) {
+						ellipse.set('angle',value);
 						canvas.renderAll();
 					},
 					onComplete : function () {
