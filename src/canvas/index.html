@@ -47,8 +47,52 @@
 				canvas.width = 400;			
 				canvas.height = 400;				
 				canvas.renderTo("#test");
-				rect = new t.canvas.rect({x:0,y:0, angle : 0});
-				rect2 = new t.canvas.rect({
+				rect = new t.canvas.rect({
+					x:100,
+					y:100, 
+					width :20,
+					height:20,
+					angle:0,
+					
+					
+					//strokeStyle : 'blue',
+					strokeWidth : 1
+				});
+
+				circle = new t.canvas.circle({
+					fill : 'green',
+					x : 70,
+					y: 50,
+					strokeStyle : 'blue',
+					radius : 20,
+					strokeWidth : 3,
+					opacity: 0.1,
+					end : 270,
+					flipY:1
+				});
+				var c = circle.getCenter();
+				
+				circle2 = new t.canvas.circle({
+					fill : 'green',
+					x : c.x -5,
+					y: c.y -5,
+					radius:5
+				});
+				canvas.add(circle,rect,circle2);
+				t.animation({
+					startValue : 0,
+					endValue : 360,
+					duration: 5000,
+					onChange : function (value) {
+						circle.set('angle',value);
+						canvas.renderAll();
+					},
+					onComplete : function () {
+						console.log('onComplete');
+					}
+				});
+				//canvas.renderAll();
+				/*rect2 = new t.canvas.rect({
 					width:50,
 					x:20,
 					y:100,
@@ -211,9 +255,7 @@
 						console.log('onAbort');
 					}
 				});*/
-				setTimeout (function () {
-					console.log('setTimeout');
-				},10000);
+
 				//setInterval(function () {animal(image)},100);
 				//setInterval(function () {animal(line)},100);
 				//setInterval(function () {animal(circle)},100);
