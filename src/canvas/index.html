@@ -43,6 +43,13 @@
 			var polygon;
 			var cloneRect;
 			t.dom.onReady(function () {
+				var a = {
+					get X () {
+						return 55;
+					}
+				}
+				console.log(a.X);
+				//return; 
 				canvas = new t.canvas('#canvas');	
 				canvas.width = 400;			
 				canvas.height = 400;				
@@ -367,16 +374,6 @@
 				//setInterval(function () {animal(circle)},100);
 				
 			});
-			var angle = 0;
-			function animal (obj) {
-				if(angle == 360 ) {
-					angle = 0;
-				}
-				angle++;
-				obj.set('angle',angle);
-				canvas.renderAll();
-			}
-			
 		</script>
 	</body>
 </html>

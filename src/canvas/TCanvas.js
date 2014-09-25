@@ -4,7 +4,6 @@
 
 		Implements : [t.Base.Class.Event],
 		
-		_canvas : null,
 		_el : null,
 		_ctx : null,
 		
@@ -19,6 +18,7 @@
 				this._canvas = t.dom.create('canvas').first;
 			}
 			this._ctx = this._canvas.getContext('2d');
+			return this;
 		},
 		get context () {
 			return this._ctx;

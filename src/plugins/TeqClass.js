@@ -1,29 +1,73 @@
 // accessors 
 (function () {
-	var define = function (object, property, accessors) {	
-		if (accessors) {
-			if (accessors.getter) {
-				object.__defineGetter__(property, accessors.getter);
+
+	'use strict';
+	var standard = !!Object.getOwnPropertyDescriptor, nonStandard = !!{}.__defineGetter__,
+	define = nonStandard ? 
+		function (object, property, accessors) {	
+			if (accessors) {
+				if (accessors.get) {
+					object.__defineGetter__(property, accessors.get);
+				}
+				if (accessors.set){
+					 object.__defineSetter__(property, accessors.set);
+				}
 			}
-			if (accessors.setter){
-				 object.__defineSetter__(property, accessors.setter);
-			}
+			return object;
 		}
-		return object;
+	: 
+	function (object, prop, accessors) {
+		if (accessors) {
+			console.log(accessors);
+			var desc = {
+				get: accessors.get,
+				set: accessors.set,
+				configurable: true,
+				enumerable: true
+			};
+			Object.defineProperty(object, prop, desc);
+		}
+		return Object;
+	},
+	lookup = nonStandard ?  
+		function (object, key,bool) {
+				var getter, setter;
+				getter = object.__lookupGetter__(key);
+				setter = object.__lookupSetter__(key);
+				return !!(getter || setter);
+		}
+	:
+	function (object, key,bool) {
+		var proto, accessors;
+		accessors = Object.getOwnPropertyDescriptor(object, key);
+		if(!accessors) {
+			proto = Object.getPrototypeOf(object);
+			return t.accessors.lookup(proto,key);
+		}
+		else if (accessors.get || accessors.set ){
+			return true;
+		}
+		else{
+			return false;
+		}
 	},
 	Accessors = {
-		lookup : function (object, key) {
-			var getter, setter;
-			getter = object.__lookupGetter__(key);
-			setter = object.__lookupSetter__(key);
-			return !!(getter || setter);
-		},
+		lookup : lookup,
 		find : function (object, key) {
 			if(t.accessors.lookup(object, key)){
-				return {
-					getter : object.__lookupGetter__(key),
-					setter : object.__lookupSetter__(key)
+				if(nonStandard) {
+					return {
+						get : object.__lookupGetter__(key),
+						set : object.__lookupSetter__(key)
+					}
 				}
+				else{
+					return {
+						get : object.get,
+						set : object.set
+					}
+				}
+				
 			}
 			return null;
 		},
@@ -213,7 +257,7 @@
 			}
 			var target = toProto ? this.prototype : this;
 			for (var name in props) {
-				t.accessors.define(target, name, { getter: t.lambdaFunc(props[name]) });
+				t.accessors.define(target, name, { get: t.lambdaFunc(props[name]) });
 			}
 				return this;
 		},
