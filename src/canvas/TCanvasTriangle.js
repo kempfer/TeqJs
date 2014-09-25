@@ -16,8 +16,7 @@
 		},
 		_render : function (ctx) {	
 			this._counted();
-			var widthByTo = this.getWidth() / 2,
-				heightByTo = this.getHeight() / 2;
+			var widthByTo = this.getWidth() / 2;
 			ctx.beginPath();
 			ctx.moveTo(this._x + widthByTo , this._y);
 			ctx.lineTo(this._x + this.getWidth(), this._y + this.getHeight());

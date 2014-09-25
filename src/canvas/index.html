@@ -105,7 +105,17 @@
 					//scaleY:1.2,
 					//flipY:1
 				});
-				canvas.add(circle,rect,circle2,ellipse,triangle);
+				line = new t.canvas.line({
+					x : 170,
+					y : 30,
+					x2 : 200,
+					y2: 30,
+					angle:0,
+					flipY:1,
+					scaleY:1,
+					scaleX:1
+				});
+				canvas.add(circle,rect,circle2,ellipse,triangle,line);
 				t.animation({
 					startValue : 0,
 					endValue : 360,
@@ -148,6 +158,18 @@
 					duration: 5000,
 					onChange : function (value) {
 						triangle.set('angle',value);
+						canvas.renderAll();
+					},
+					onComplete : function () {
+						console.log('onComplete');
+					}
+				});
+				t.animation({
+					startValue : 0,
+					endValue : 360,
+					duration: 5000,
+					onChange : function (value) {
+						line.set('angle',value);
 						canvas.renderAll();
 					},
 					onComplete : function () {
