@@ -53,22 +53,26 @@
 					width :20,
 					height:20,
 					angle:0,
-					
-					
+					//scaleX:2,
+					//scaleY:2,
+					//flipY:1,
 					//strokeStyle : 'blue',
 					strokeWidth : 1
 				});
 
 				circle = new t.canvas.circle({
 					fill : 'green',
-					x : 70,
-					y: 50,
-					strokeStyle : 'blue',
+					x : 0,
+					y: 0,
+					//strokeStyle : 'blue',
 					radius : 20,
 					strokeWidth : 3,
-					opacity: 0.1,
+					//opacity: 0.1,
+					scaleX:3,
+					scaleY:3,
 					end : 270,
-					flipY:1
+					flipY:1,
+					flipX:1
 				});
 				var c = circle.getCenter();
 				
@@ -85,6 +89,18 @@
 					duration: 5000,
 					onChange : function (value) {
 						circle.set('angle',value);
+						canvas.renderAll();
+					},
+					onComplete : function () {
+						console.log('onComplete');
+					}
+				});
+				t.animation({
+					startValue : 0,
+					endValue : 360,
+					duration: 5000,
+					onChange : function (value) {
+						rect.set('angle',value);
 						canvas.renderAll();
 					},
 					onComplete : function () {

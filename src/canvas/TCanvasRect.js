@@ -20,7 +20,7 @@
 			this._renderStroke(ctx);
 		},
 		_counted : function () {
-			this._x = (!this.isTransform()) ? this.getX()/this.getScaleX() : - this.getWidth()/2 ;
+			this._x = (!this.isTransform()) ? this.getX()/this.getScaleX() : - this.getWidth()/2;
 			this._y = (!this.isTransform()) ? this.getY()/this.getScaleY()  : - this.getHeight()/2;
 		}
 	});

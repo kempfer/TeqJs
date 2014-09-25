@@ -64,10 +64,10 @@
 		},
 		getCenter : function () {
 			return t.canvas.centerRectangle(
-				this.getX() * this.getScaleX(),
-				this.getY() * this.getScaleY(),
-				this.options['width'],
-				this.options['height']
+				this.getX() ,
+				this.getY() ,
+				this.options['width'] * this.getScaleX(),
+				this.options['height'] * this.getScaleY()
 			);
 		},
 		reset : function () {
@@ -99,6 +99,9 @@
 				this.getScaleY() * (this.getFlipY() ? -1 : 1)
 			);
 		},
+		_showCenter : function () {
+		
+		},
 		isTransform : function () {
 			return (this.getAngle() || this.getFlipX() || this.getFlipY());
 		}
@@ -114,6 +117,7 @@
 		scaleY : 1,
 		flipX : false,
 		flipY : false,
-		opacity: 1
+		opacity: 1,
+		isShowCenter: false,
 	}
 })(window.t)

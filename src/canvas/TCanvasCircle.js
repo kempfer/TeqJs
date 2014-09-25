@@ -36,9 +36,8 @@
 			this._renderStroke(ctx);
 		},
 		_counted : function () {
-			var center = this.getCenter();
-			this._cx = (!this.isTransform()) ? center.x : 0;
-			this._cy =  (!this.isTransform()) ? center.y : 0;
+			this._cx = (!this.isTransform()) ? this.getX() + this.getRadius() :   0;
+			this._cy =  (!this.isTransform()) ? this.getX() + this.getRadius() :  0;
 		}
 	});
 
