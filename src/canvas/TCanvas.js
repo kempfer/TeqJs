@@ -51,11 +51,11 @@
 		renderAll : function () {
 			//console.time('renderAll'); 
 			this.clear();
-			var buffer = this._ctx ;//t.canvas.buffer(this.width,this.height);
+			var buffer = t.canvas.buffer(this.width,this.height);
 			for(var key in this.objects) {
 				this.objects[key].render(buffer);
 			}		
-			//this._ctx.drawImage(buffer.canvas, 0, 0);
+			this._ctx.drawImage(buffer.canvas, 0, 0);
 			this.fire('renderAll');
 			//console.timeEnd('renderAll');
 			

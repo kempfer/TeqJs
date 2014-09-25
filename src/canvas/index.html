@@ -115,6 +115,15 @@
 					scaleY:1,
 					scaleX:1
 				});
+				image = new t.canvas.image({
+					x : 200,
+					y : 30,     
+					angle:45,
+					//flipY : true
+				});
+				image.on('loadImage', function () {
+					canvas.add(image);
+				});
 				canvas.add(circle,rect,circle2,ellipse,triangle,line);
 				t.animation({
 					startValue : 0,
@@ -176,6 +185,18 @@
 						console.log('onComplete');
 					}
 				});
+				/*t.animation({
+					startValue : 0,
+					endValue : 360,
+					duration: 5000,
+					onChange : function (value) {
+						image.set('angle',value);
+						canvas.renderAll();
+					},
+					onComplete : function () {
+						console.log('onComplete');
+					}
+				});*/
 				//canvas.renderAll();
 				/*rect2 = new t.canvas.rect({
 					width:50,
