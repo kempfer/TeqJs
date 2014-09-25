@@ -95,7 +95,17 @@
 					end : 270,
 					flipY:1
 				});
-				canvas.add(circle,rect,circle2,ellipse);
+				triangle = new t.canvas.triangle({
+					x: 150,
+					y: 150,
+					angle:0,
+					strokeStyle : 'blue',
+					strokeWidth : 5,
+					scaleX:2,
+					//scaleY:1.2,
+					//flipY:1
+				});
+				canvas.add(circle,rect,circle2,ellipse,triangle);
 				t.animation({
 					startValue : 0,
 					endValue : 360,
@@ -126,6 +136,18 @@
 					duration: 5000,
 					onChange : function (value) {
 						ellipse.set('angle',value);
+						canvas.renderAll();
+					},
+					onComplete : function () {
+						console.log('onComplete');
+					}
+				});
+				t.animation({
+					startValue : 0,
+					endValue : 360,
+					duration: 5000,
+					onChange : function (value) {
+						triangle.set('angle',value);
 						canvas.renderAll();
 					},
 					onComplete : function () {
