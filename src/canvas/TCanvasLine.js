@@ -11,7 +11,6 @@
 		init : function initTriangle (options) {
 			this.defaultOptions = t.canvas.line.options;
 			this.callParent(options);
-			console.log(this.originalOptions.x2 - this.originalOptions.x);
 			this.set('width',Math.abs(this.originalOptions.x2 - this.originalOptions.x) || 1);
 			this.set('height',Math.abs(this.originalOptions.y2 - this.originalOptions.y) || this.getStrokeWidth());
 			return this;

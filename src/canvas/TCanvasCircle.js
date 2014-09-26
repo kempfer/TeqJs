@@ -34,7 +34,7 @@
 		},
 		_counted : function () {
 			this._cx = (!this.isTransform()) ? this.getX() + this.getRadius() :   0;
-			this._cy =  (!this.isTransform()) ? this.getX() + this.getRadius() :  0;
+			this._cy =  (!this.isTransform()) ? this.getY() + this.getRadius() :  0;
 		}
 	});
 

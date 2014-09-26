@@ -51,8 +51,8 @@
 				console.log(a.X);
 				//return; 
 				canvas = new t.canvas('#canvas');	
-				canvas.width = 400;			
-				canvas.height = 400;				
+				canvas.width = 1000;			
+				canvas.height = 1000;				
 				canvas.renderTo("#test");
 				rect = new t.canvas.rect({
 					x:100,
@@ -70,7 +70,7 @@
 				circle = new t.canvas.circle({
 					fill : 'green',
 					x : 0,
-					y: 0,
+					y: 20,
 					//strokeStyle : 'blue',
 					radius : 20,
 					strokeWidth : 3,
@@ -85,8 +85,8 @@
 				
 				circle2 = new t.canvas.circle({
 					fill : 'green',
-					x : c.x -5,
-					y: c.y -5,
+					x : 192.5 -5,
+					y: 122.5 -5,
 					radius:5
 				});
 				ellipse = new t.canvas.ellipse({
@@ -129,22 +129,51 @@
 					//flipY : true
 				});
 				image.on('loadImage', function () {
-					canvas.add(image);
+					//canvas.add(image);
 				});
-				canvas.add(circle,rect,circle2,ellipse,triangle,line);
+				
+				polygon = new t.canvas.polygon({
+					points : [
+						{x: 185, y: 0},
+						{x: 250, y: 100},
+						{x: 385, y: 170},
+						{x: 0, y: 245}
+					],
+					angle:0,
+					flipY:1,
+					//strokeStyle : 'green',
+					//strokeWidth : 5,
+					fill:'purple',
+					opacity: 1
+				});
+				var rect3 = new t.canvas.rect({
+					x:0,
+					y:0, 
+					width :385,
+					height:245,
+					angle:0,
+					fill: false,
+					//scaleX:2,
+					//scaleY:2,
+					//flipY:1,
+					strokeStyle : 'blue',
+					strokeWidth : 1
+				});
+				//canvas.add(circle,rect,circle2,ellipse,triangle,line,polygon);
+				canvas.add(polygon,rect3,circle2);
 				t.animation({
 					startValue : 0,
 					endValue : 360,
 					duration: 5000,
 					onChange : function (value) {
-						circle.set('angle',value);
+						polygon.set('angle',value);
 						canvas.renderAll();
 					},
 					onComplete : function () {
 						console.log('onComplete');
 					}
 				});
-				t.animation({
+				/*t.animation({
 					startValue : 0,
 					endValue : 360,
 					duration: 5000,
@@ -191,7 +220,7 @@
 					onComplete : function () {
 						console.log('onComplete');
 					}
-				});
+				});*/
 				/*t.animation({
 					startValue : 0,
 					endValue : 360,
