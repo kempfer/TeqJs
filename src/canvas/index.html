@@ -160,13 +160,13 @@
 					strokeWidth : 1
 				});
 				//canvas.add(circle,rect,circle2,ellipse,triangle,line,polygon);
-				canvas.add(polygon,rect3,circle2);
+				canvas.add(rect);
 				t.animation({
 					startValue : 0,
 					endValue : 360,
 					duration: 5000,
 					onChange : function (value) {
-						polygon.set('angle',value);
+						rect.set('angle',value);
 						canvas.renderAll();
 					},
 					onComplete : function () {
