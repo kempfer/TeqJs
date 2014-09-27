@@ -67,14 +67,6 @@
 				<input type="range" id="scale-control" value="0" min="1" max="10">
 			</div>
 			<div>
-				<span>Start:</span>
-				<input type="range" id="start-control" value="0" min="0" max="360">
-			</div>
-			<div>
-				<span>End:</span>
-				<input type="range" id="end-control" value="360" min="0" max="360">
-			</div>
-			<div>
 				<span>Flip X:</span>
 				<input type="radio" id="flipX-control" value="1" name="flipX-control">
 				<input type="radio" id="flipX-control" value="0"  name="flipX-control" >
@@ -86,64 +78,53 @@
 			</div>
 		</div>
 		<script>
-			var circle;
-			var canvas;
+			var rect;
 			t.dom.onReady(function () {
-				canvas = new t.canvas('#canvas');
-				circle = new t.canvas.circle({
+				var canvas = new t.canvas('#canvas');
+				triangle = new t.canvas.triangle({
 					x:0,
 					y:0, 
-					radius : 20,
+					width :20,
+					height:20,
 					fill:'green'
 				});
-				canvas.add(circle);
+				canvas.add(triangle);
 				var xControl = t.dom('#x-control');
 				xControl.bind('change', function () {
 					var value = parseFloat(this.value);
-					circle.set('x',value);
+					triangle.set('x',value);
 					canvas.renderAll();
 				});
 				var yControl = t.dom('#y-control');
 				yControl.bind('change', function () {
 					var value = parseFloat(this.value);
-					circle.set('y',value);
+					triangle.set('y',value);
 					canvas.renderAll();
 				});
 				var angleControl = t.dom('#angle-control');
 				angleControl.bind('change', function () {
 					var value = parseFloat(this.value);
-					circle.set('angle',value);
+					console.log(value);
+					triangle.set('angle',value);
 					canvas.renderAll();
 				});
 				var scaleControl = t.dom('#scale-control');
 				scaleControl.bind('change', function () {
 					var value = parseFloat(this.value);
-					circle.set('scaleX',value);
-					circle.set('scaleY',value);
-					canvas.renderAll();
-				});
-				var startControl = t.dom('#start-control');
-				startControl.bind('change', function () {
-					var value = parseFloat(this.value);
-					circle.set('start',value);
-					canvas.renderAll();
-				});
-				var endControl = t.dom('#end-control');
-				endControl.bind('change', function () {
-					var value = parseFloat(this.value);
-					circle.set('end',value);
+					triangle.set('scaleX',value);
+					triangle.set('scaleY',value);
 					canvas.renderAll();
 				});
 				var flipXControl = t.dom('input[name="flipX-control"]');
 				flipXControl.bind('change', function () {
 					var value = parseInt(t.dom(this).val());
-					circle.set('flipX',value);
+					triangle.set('flipX',value);
 					canvas.renderAll();
 				});
 				var flipYControl = t.dom('input[name="flipY-control"]');
 				flipYControl.bind('change', function () {
 					var value = parseInt(t.dom(this).val());
-					circle.set('flipY',value);
+					triangle.set('flipY',value);
 					canvas.renderAll();
 				});
 			});

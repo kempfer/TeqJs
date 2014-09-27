@@ -85,8 +85,9 @@
 			}
 		},
 		remove : function (ctx) {
+			var context = ctx || this.context;
 			var rect = this.getRect();
-			ctx.clearRect(rect.x,rect.y,rect.w,rect.h);
+			context.clearRect(rect.x,rect.y,rect.w,rect.h);
 		},
 		_renderFill : function (ctx) {
 			if(this.getFill()){
@@ -108,15 +109,15 @@
 				ctx.rotate(t.canvas.degree(this.getAngle()));
 			}
 			ctx.scale(
-				this.getScaleX() * (this.getFlipX() ? -1 : 1),
-				this.getScaleY() * (this.getFlipY() ? -1 : 1)
+				this.getScaleX() * (!t.isEmpty(this.getFlipX()) ? -1 : 1),
+				this.getScaleY() * (!t.isEmpty(this.getFlipY()) ? -1 : 1)
 			);
 		},
 		_showCenter : function () {
 		
 		},
 		isTransform : function () {
-			return (this.getAngle() || this.getFlipX() || this.getFlipY());
+			return (this.getAngle() || !t.isEmpty(this.getFlipX()) || !t.isEmpty(this.getFlipY()));
 		}
 	});
 	t.canvas.object.options = {

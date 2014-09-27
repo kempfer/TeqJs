@@ -4,8 +4,9 @@
 	t.Class.define('t.canvas.image', {
 		
 		Extend : t.canvas.object,
-		name : '',
+
 		_img : null,
+		
 		/**
 		* Constructor
 		* @param {Object} [options] Options object
@@ -14,9 +15,7 @@
 		init : function initTriangle (options) {
 			this.defaultOptions = t.canvas.image.options;
 			this.callParent(options);
-			this._loadImage().then(function (img) {
-				this.fire('loadImage');
-			}.bind(this));
+			this.loadImage();
 		},
 		_render : function (ctx) {	
 			this._counted();
@@ -29,13 +28,13 @@
 			this._x = (!this.isTransform()) ? this.getX()/this.getScaleX() : - this.getWidth()/2;
 			this._y = (!this.isTransform()) ? this.getY()/this.getScaleY()  : - this.getHeight()/2;
 		},
-		_loadImage  : function () {
+		loadImage  : function () {
 			var src = this.getSrc();
 			return new t.promise(function (resolve, reject) {
-				if(this._img === null){
 					var img = new Image(); 
 					img.onload = function (e){
 						this._img = img;
+						this.fire('loadImage');
 						resolve(img); 
 					}.bind(this);
 					img.onerorr = function (e) {
@@ -43,13 +42,16 @@
 						console.error(e);
 					}
 					img.src = src;
-				}
-				else{
-					resolve(this._img);
-				}
-
 			}.bind(this));
 
+		},
+		resetOriginal : function () {
+			if(this._img === null){
+				console.error('Image not load');
+			}
+			this.reset();
+			this.set('width',this._img.width);
+			this.set('height',this._img.height);
 		}
 	});
 

@@ -8,7 +8,9 @@
 		init : function (options) {
 			this.defaultOptions = t.canvas.polygon.options;
 			this.callParent(options);
-			var rect = this.getRect();
+			var rect = this._getRect();
+			this.originalOptions.x = rect.x;
+			this.originalOptions.x = rect.y;
 			this.set('x',rect.x);
 			this.set('y',rect.y);
 			this.set('width',rect.w);
@@ -30,21 +32,26 @@
 		},
 		_counted : function () {
 			this._points = [];
+			var i,points,point, center;
 			if(this.isTransform()) {
-				var i,points,point, center;
 				points = this.getPoints();
 				center = this.getCenter();
 				for(i = 0; i < points.length; i++){
 					point = points[i];	this._points[i] = {};		
-					this._points[i].x = point.x - center.x;
-					this._points[i].y = point.y - center.y;
+					this._points[i].x = point.x - center.x - (this.originalOptions.x - this.getX());
+					this._points[i].y = point.y - center.y - (this.originalOptions.x - this.getY());
 				}
 			}
 			else{
-				this._points = this.getPoints();
+				points = this.getPoints();
+				for(i = 0; i < points.length; i++){
+					point = points[i];	this._points[i] = {};		
+					this._points[i].x = point.x  - (this.originalOptions.x - this.getX());
+					this._points[i].y = point.y - (this.originalOptions.x - this.getY());
+				}
 			}
 		},
-		getRect : function () {
+		_getRect : function () {
 			var	min = this.getMin(), 
 				max = this.getMax();
 			return {

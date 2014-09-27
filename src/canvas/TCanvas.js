@@ -44,6 +44,7 @@
 			for ( i = 0; i < arguments.length; i++) {
 				obj = arguments[i];
 				obj.id = t.uniqueId();
+				obj.context = this._ctx;
 				this.objects[obj.id] = obj;
 			}
 			this.renderAll();

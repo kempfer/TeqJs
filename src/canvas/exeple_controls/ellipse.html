@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Teq Canvas Lib</title>
+		<title>Teq Canvas Controls Ellipse</title>
 		<script type="text/javascript"  src="../../Teq.js"></script>		
 		<script type="text/javascript"  src="../../plugins/TeqArray.js"></script>
 		<script type="text/javascript"  src="../../plugins/TeqDom.js"></script>
@@ -86,64 +86,64 @@
 			</div>
 		</div>
 		<script>
-			var circle;
-			var canvas;
+			var ellipse;
 			t.dom.onReady(function () {
-				canvas = new t.canvas('#canvas');
-				circle = new t.canvas.circle({
+				var canvas = new t.canvas('#canvas');
+				ellipse = new t.canvas.ellipse({
 					x:0,
 					y:0, 
-					radius : 20,
+					xRadius : 20,
+					yRadius : 40,
 					fill:'green'
 				});
-				canvas.add(circle);
+				canvas.add(ellipse);
 				var xControl = t.dom('#x-control');
 				xControl.bind('change', function () {
 					var value = parseFloat(this.value);
-					circle.set('x',value);
+					ellipse.set('x',value);
 					canvas.renderAll();
 				});
 				var yControl = t.dom('#y-control');
 				yControl.bind('change', function () {
 					var value = parseFloat(this.value);
-					circle.set('y',value);
+					ellipse.set('y',value);
 					canvas.renderAll();
 				});
 				var angleControl = t.dom('#angle-control');
 				angleControl.bind('change', function () {
 					var value = parseFloat(this.value);
-					circle.set('angle',value);
+					ellipse.set('angle',value);
 					canvas.renderAll();
 				});
 				var scaleControl = t.dom('#scale-control');
 				scaleControl.bind('change', function () {
 					var value = parseFloat(this.value);
-					circle.set('scaleX',value);
-					circle.set('scaleY',value);
+					ellipse.set('scaleX',value);
+					ellipse.set('scaleY',value);
 					canvas.renderAll();
 				});
 				var startControl = t.dom('#start-control');
 				startControl.bind('change', function () {
 					var value = parseFloat(this.value);
-					circle.set('start',value);
+					ellipse.set('start',value);
 					canvas.renderAll();
 				});
 				var endControl = t.dom('#end-control');
 				endControl.bind('change', function () {
 					var value = parseFloat(this.value);
-					circle.set('end',value);
+					ellipse.set('end',value);
 					canvas.renderAll();
 				});
 				var flipXControl = t.dom('input[name="flipX-control"]');
 				flipXControl.bind('change', function () {
 					var value = parseInt(t.dom(this).val());
-					circle.set('flipX',value);
+					ellipse.set('flipX',value);
 					canvas.renderAll();
 				});
 				var flipYControl = t.dom('input[name="flipY-control"]');
 				flipYControl.bind('change', function () {
 					var value = parseInt(t.dom(this).val());
-					circle.set('flipY',value);
+					ellipse.set('flipY',value);
 					canvas.renderAll();
 				});
 			});
