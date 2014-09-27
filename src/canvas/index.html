@@ -22,6 +22,7 @@
 		<script type="text/javascript"  src="TCanvasLine.js"></script>
 		<script type="text/javascript"  src="TCanvasImage.js"></script>
 		<script type="text/javascript"  src="TCanvasPolygon.js"></script>
+		<script type="text/javascript"  src="TCanvasText.js"></script>
 		
 		
 	</head>
@@ -42,6 +43,7 @@
 			var image;
 			var polygon;
 			var cloneRect;
+			var text;
 			t.dom.onReady(function () {
 				var a = {
 					get X () {
@@ -51,8 +53,8 @@
 				console.log(a.X);
 				//return; 
 				canvas = new t.canvas('#canvas');	
-				canvas.width = 1000;			
-				canvas.height = 1000;				
+				canvas.width = 400;			
+				canvas.height = 400;				
 				canvas.renderTo("#test");
 				rect = new t.canvas.rect({
 					x:100,
@@ -147,26 +149,33 @@
 					opacity: 1
 				});
 				var rect3 = new t.canvas.rect({
-					x:0,
-					y:0, 
-					width :385,
-					height:245,
+					x: 70,
+					y: 70, 
+					width :228,
+					height:63,
 					angle:0,
 					fill: false,
-					//scaleX:2,
-					//scaleY:2,
-					//flipY:1,
 					strokeStyle : 'blue',
 					strokeWidth : 1
 				});
 				//canvas.add(circle,rect,circle2,ellipse,triangle,line,polygon);
-				canvas.add(rect);
+				text = new t.canvas.text({
+					x : 70,
+					y : 70,
+					color:'red',
+					fontSize : 30,
+					text : 'Teq Canvas Text<br>New line',
+					stroke : true,
+					fill: false,
+					fontFamily : 'Arial'
+				});
+				canvas.add(text,rect3);
 				t.animation({
 					startValue : 0,
 					endValue : 360,
 					duration: 5000,
 					onChange : function (value) {
-						rect.set('angle',value);
+						text.set('angle',value);
 						canvas.renderAll();
 					},
 					onComplete : function () {

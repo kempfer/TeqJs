@@ -133,5 +133,9 @@
 		flipY : false,
 		opacity: 1,
 		isShowCenter: false,
+		shadowColor : false,
+		shadowOffsetX : false,
+		shadowOffsetY : false,
+		shadowBlur : false
 	}
 })(window.t)
