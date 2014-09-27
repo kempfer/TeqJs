@@ -30,14 +30,14 @@
 		return Object;
 	},
 	lookup = nonStandard ?  
-		function (object, key,bool) {
+		function (object, key) {
 				var getter, setter;
 				getter = object.__lookupGetter__(key);
 				setter = object.__lookupSetter__(key);
 				return !!(getter || setter);
 		}
 	:
-	function (object, key,bool) {
+	function (object, key) {
 		var proto, accessors;
 		accessors = Object.getOwnPropertyDescriptor(object, key);
 		if(!accessors) {
@@ -153,7 +153,7 @@
 				}
 				newObject = {};
 				for (var key in object) {
-					if (!!t.accessors.inherit(object, newObject, key)){
+					if (!t.accessors.inherit(object, newObject, key)){
 						newObject[key] = clone(object[key]);
 					}
 				}

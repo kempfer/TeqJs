@@ -86,7 +86,7 @@
 							animate.attr('disabled','disabled');
 						},
 						onChange : function (value) {
-							rect.set('y',value);
+							rect.set('x',value);
 							canvas.renderAll();
 						},
 						onComplete : function () {
@@ -96,7 +96,7 @@
 								duration: 1000,
 								easing: t.animation.easingList[animalFunc],
 								onChange : function (value) {
-									rect.set('y',value);
+									rect.set('x',value);
 									canvas.renderAll();
 								},
 								onComplete: function (){

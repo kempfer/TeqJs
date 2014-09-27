@@ -13,6 +13,7 @@
 		<script type="text/javascript"  src="../plugins/TeqBasesClass.js"></script>	
 		<script type="text/javascript"  src="../plugins/TeqPromise.js"></script>	
 		<script type="text/javascript"  src="../plugins/TeqAnimation.js"></script>
+		<script type="text/javascript"  src="../plugins/TeqClassMouse.js"></script>
 		<script type="text/javascript"  src="TCanvas.js"></script>		
 		<script type="text/javascript"  src="TCanvasObj.js"></script>	
 		<script type="text/javascript"  src="TCanvasRect.js"></script>	
@@ -23,6 +24,7 @@
 		<script type="text/javascript"  src="TCanvasImage.js"></script>
 		<script type="text/javascript"  src="TCanvasPolygon.js"></script>
 		<script type="text/javascript"  src="TCanvasText.js"></script>
+		
 		
 		
 	</head>
@@ -50,6 +52,15 @@
 						return 55;
 					}
 				}
+				var mouse = new t.Base.Class.Mouse('#canvas');
+				/*mouse.on('move', function (e) {
+					console.log(this.delta);
+					console.log(e.delta);
+				});*/
+				mouse.on('wheel', function (e) {
+					console.log(this.point);
+					console.log(e.delta);
+				});
 				console.log(a.X);
 				//return; 
 				canvas = new t.canvas('#canvas');	
