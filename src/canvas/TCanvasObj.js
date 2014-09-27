@@ -42,6 +42,14 @@
 			}
 			return this;
 		}, 
+		setAnimated : function (key,val,duration) {
+			if(t.array.contains(t.canvas.object.optionAnimated,key)){
+				
+			}
+			else{
+				this.set(key,val);
+			}
+		},
 		render : function (ctx) {
 			var ctx = ctx || t.canvas.buffer();
 			ctx.save();
@@ -137,5 +145,6 @@
 		shadowOffsetX : false,
 		shadowOffsetY : false,
 		shadowBlur : false
-	}
+	},
+	t.canvas.object.optionAnimated = ['x','y','width','height','scaleX','scaleY','opacity','angle'];
 })(window.t)

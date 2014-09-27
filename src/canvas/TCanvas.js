@@ -52,6 +52,9 @@
 		removeObj : function (object) {
 			object.remove(this.context);
 		},
+		renderObj : function (object) {
+			this.renderAll();
+		},
 		renderAll : function () {
 			//console.time('renderAll'); 
 			this.clear();

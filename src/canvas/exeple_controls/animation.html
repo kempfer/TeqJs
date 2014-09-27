@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Teq Canvas Lib</title>
+		<script type="text/javascript"  src="../../Teq.js"></script>		
+		<script type="text/javascript"  src="../../plugins/TeqArray.js"></script>
+		<script type="text/javascript"  src="../../plugins/TeqDom.js"></script>
+		<script type="text/javascript"  src="../../plugins/TeqNumber.js"></script>
+		<script type="text/javascript"  src="../../plugins/TeqObject.js"></script>
+		<script type="text/javascript"  src="../../plugins/TeqString.js"></script>	
+		<script type="text/javascript"  src="../../plugins/TeqClass.js"></script>								
+		<script type="text/javascript"  src="../../plugins/TeqBasesClass.js"></script>	
+		<script type="text/javascript"  src="../../plugins/TeqPromise.js"></script>	
+		<script type="text/javascript"  src="../../plugins/TeqAnimation.js"></script>
+		<script type="text/javascript"  src="../../plugins/TeqForm.js"></script>
+		<script type="text/javascript"  src="../TCanvas.js"></script>		
+		<script type="text/javascript"  src="../TCanvasObj.js"></script>	
+		<script type="text/javascript"  src="../TCanvasRect.js"></script>	
+		<script type="text/javascript"  src="../TCanvasCircle.js"></script>
+		<script type="text/javascript"  src="../TCanvasTriangle.js"></script>
+		<script type="text/javascript"  src="../TCanvasEllipse.js"></script>
+		<script type="text/javascript"  src="../TCanvasLine.js"></script>
+		<script type="text/javascript"  src="../TCanvasImage.js"></script>
+		<script type="text/javascript"  src="../TCanvasPolygon.js"></script>
+		
+		<style>
+			#canvas {
+				float : left;
+				margin-right: 50px;
+				border: 1px solid;
+				width : 500px;
+				height: 500px;
+			}
+			#controls {
+				/*border: 1px solid;*/
+				background: #fafafa;
+				width: 250px;
+				float : left;
+				height: 200px;
+				padding: 15px;
+			}
+			#controls div span{
+				width: 50px;
+				display: inline-block;
+				height: 30px;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" style=";" width="500" height="500"> </canvas>
+		<div id="controls">
+			<span>Select easing:</span>
+			<select id="select-aimanl-easing"></select>
+			<button id="animate"> Animate </button>
+		</div>
+		<script>
+			var rect;
+			var canvas;
+			t.dom.onReady(function () {
+				canvas = new t.canvas('#canvas');
+				rect = new t.canvas.rect({
+					x: 50,
+					y: 50, 
+					width : 80,
+					height: 80,
+					fill:'green'
+				});
+				canvas.add(rect);
+				var selectAimanlEasing = t.dom('#select-aimanl-easing');
+				for(var key in t.animation.easingList){
+					option = t.dom.create('option');
+					option.text = key;
+					option.first.value = key;
+					selectAimanlEasing.append(option);
+				}
+				var animate = t.dom('#animate');
+				animate.bind('click', function () {
+					var animalFunc = selectAimanlEasing.val();
+					t.animation({
+						startValue : 50,
+						endValue : 300,
+						duration: 1000,
+						easing: t.animation.easingList[animalFunc],
+						onStart: function () {
+							animate.attr('disabled','disabled');
+						},
+						onChange : function (value) {
+							rect.set('y',value);
+							canvas.renderAll();
+						},
+						onComplete : function () {
+							t.animation({
+								startValue : 300,
+								endValue : 50,
+								duration: 1000,
+								easing: t.animation.easingList[animalFunc],
+								onChange : function (value) {
+									rect.set('y',value);
+									canvas.renderAll();
+								},
+								onComplete: function (){
+									animate.removeAttr('disabled');
+								}
+							});
+						}
+					});
+				});
+			});
+		</script>
+	</body>
+</html>
