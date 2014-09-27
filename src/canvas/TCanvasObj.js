@@ -63,17 +63,30 @@
 			}
 		},
 		getCenter : function () {
+			var rect = this.getRect();
 			return t.canvas.centerRectangle(
-				this.getX() ,
-				this.getY() ,
-				this.options['width'] * this.getScaleX(),
-				this.options['height'] * this.getScaleY()
+				rect.x ,
+				rect.y ,
+				rect.w,
+				rect.h
 			);
+		},
+		getRect : function () {
+			return {
+				x : this.option('x'),
+				y : this.option('y'),
+				w : this.option('width') * this.getScaleX(),
+				h : this.option('height') * this.getScaleY()
+			}
 		},
 		reset : function () {
 			for(var key in this.originalOptions){
 				this.set(key,this.originalOptions[key], false);
 			}
+		},
+		remove : function (ctx) {
+			var rect = this.getRect();
+			ctx.clearRect(rect.x,rect.y,rect.w,rect.h);
 		},
 		_renderFill : function (ctx) {
 			if(this.getFill()){
