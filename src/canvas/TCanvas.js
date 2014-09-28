@@ -73,8 +73,20 @@
 		toImage : function (type) {
 			type = type || "image/png";
 			return this._canvas.toDataURL(type);
+		},
+		getActives : function () {
+			var objects = [];
+			for(var key in this.objects) {
+				if(this.objects[key].isActive()){
+					objects.push(this.objects[key]);
+				}
+			}		
+			return objects;
+		},
+		activateMouse : function () {
+			this.mouse = new t.Base.Class.Mouse(this._canvas);
+			this.mouse.on('move');
 		}
-
 	});
 
 	/** @private */

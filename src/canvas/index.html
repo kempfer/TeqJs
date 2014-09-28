@@ -14,6 +14,7 @@
 		<script type="text/javascript"  src="../plugins/TeqPromise.js"></script>	
 		<script type="text/javascript"  src="../plugins/TeqAnimation.js"></script>
 		<script type="text/javascript"  src="../plugins/TeqClassMouse.js"></script>
+		<script type="text/javascript"  src="../base_class/TeqClassKeyboard.js"></script>
 		<script type="text/javascript"  src="TCanvas.js"></script>		
 		<script type="text/javascript"  src="TCanvasObj.js"></script>	
 		<script type="text/javascript"  src="TCanvasRect.js"></script>	
@@ -46,6 +47,7 @@
 			var polygon;
 			var cloneRect;
 			var text;
+			var keyboard;
 			t.dom.onReady(function () {
 				var a = {
 					get X () {
@@ -61,115 +63,20 @@
 					console.log(this.point);
 					console.log(e.delta);
 				});
-				console.log(a.X);
+				keyboard = new t.Base.Class.Keyboard('body');
+				keyboard.on('ctrl c:up', function (e) {
+					console.log('ctrl c:up');
+				});
+				keyboard.on('ctrl alt z:up', function (e) {
+					console.log('ctrl alt z:up');
+				});
+				//keyboard
 				//return; 
 				canvas = new t.canvas('#canvas');	
 				canvas.width = 400;			
 				canvas.height = 400;				
 				canvas.renderTo("#test");
-				rect = new t.canvas.rect({
-					x:100,
-					y:100, 
-					width :20,
-					height:20,
-					angle:0,
-					//scaleX:2,
-					//scaleY:2,
-					//flipY:1,
-					//strokeStyle : 'blue',
-					strokeWidth : 1
-				});
 
-				circle = new t.canvas.circle({
-					fill : 'green',
-					x : 0,
-					y: 20,
-					//strokeStyle : 'blue',
-					radius : 20,
-					strokeWidth : 3,
-					//opacity: 0.1,
-					scaleX:3,
-					scaleY:3,
-					end : 270,
-					flipY:1,
-					flipX:1
-				});
-				var c = circle.getCenter();
-				
-				circle2 = new t.canvas.circle({
-					fill : 'green',
-					x : 192.5 -5,
-					y: 122.5 -5,
-					radius:5
-				});
-				ellipse = new t.canvas.ellipse({
-					x: 120,
-					y: 100,
-					xRadius: 30,
-					yRadius: 15,
-					angle:0,
-					strokeStyle : 'blue',
-					strokeWidth : 5,
-					scaleX:1.2,
-					scaleY:1.2,
-					end : 270,
-					flipY:1
-				});
-				triangle = new t.canvas.triangle({
-					x: 150,
-					y: 150,
-					angle:0,
-					strokeStyle : 'blue',
-					strokeWidth : 5,
-					scaleX:2,
-					//scaleY:1.2,
-					//flipY:1
-				});
-				line = new t.canvas.line({
-					x : 170,
-					y : 30,
-					x2 : 200,
-					y2: 30,
-					angle:0,
-					flipY:1,
-					scaleY:1,
-					scaleX:1
-				});
-				image = new t.canvas.image({
-					x : 200,
-					y : 30,     
-					angle:45,
-					//flipY : true
-				});
-				image.on('loadImage', function () {
-					//canvas.add(image);
-				});
-				
-				polygon = new t.canvas.polygon({
-					points : [
-						{x: 185, y: 0},
-						{x: 250, y: 100},
-						{x: 385, y: 170},
-						{x: 0, y: 245}
-					],
-					angle:0,
-					flipY:1,
-					//strokeStyle : 'green',
-					//strokeWidth : 5,
-					fill:'purple',
-					opacity: 1
-				});
-				var rect3 = new t.canvas.rect({
-					x: 70,
-					y: 70, 
-					width :228,
-					height:63,
-					angle:0,
-					fill: false,
-					strokeStyle : 'blue',
-					strokeWidth : 1
-				});
-				//canvas.add(circle,rect,circle2,ellipse,triangle,line,polygon);
 				text = new t.canvas.text({
 					x : 70,
 					y : 70,
@@ -180,248 +87,7 @@
 					fill: false,
 					fontFamily : 'Arial'
 				});
-				canvas.add(text,rect3);
-				t.animation({
-					startValue : 0,
-					endValue : 360,
-					duration: 5000,
-					onChange : function (value) {
-						text.set('angle',value);
-						canvas.renderAll();
-					},
-					onComplete : function () {
-						console.log('onComplete');
-					}
-				});
-				/*t.animation({
-					startValue : 0,
-					endValue : 360,
-					duration: 5000,
-					onChange : function (value) {
-						rect.set('angle',value);
-						canvas.renderAll();
-					},
-					onComplete : function () {
-						console.log('onComplete');
-					}
-				});
-				t.animation({
-					startValue : 0,
-					endValue : 360,
-					duration: 5000,
-					onChange : function (value) {
-						ellipse.set('angle',value);
-						canvas.renderAll();
-					},
-					onComplete : function () {
-						console.log('onComplete');
-					}
-				});
-				t.animation({
-					startValue : 0,
-					endValue : 360,
-					duration: 5000,
-					onChange : function (value) {
-						triangle.set('angle',value);
-						canvas.renderAll();
-					},
-					onComplete : function () {
-						console.log('onComplete');
-					}
-				});
-				t.animation({
-					startValue : 0,
-					endValue : 360,
-					duration: 5000,
-					onChange : function (value) {
-						line.set('angle',value);
-						canvas.renderAll();
-					},
-					onComplete : function () {
-						console.log('onComplete');
-					}
-				});*/
-				/*t.animation({
-					startValue : 0,
-					endValue : 360,
-					duration: 5000,
-					onChange : function (value) {
-						image.set('angle',value);
-						canvas.renderAll();
-					},
-					onComplete : function () {
-						console.log('onComplete');
-					}
-				});*/
-				//canvas.renderAll();
-				/*rect2 = new t.canvas.rect({
-					width:50,
-					x:20,
-					y:100,
-					angle:0,
-					fill:'red',
-					strokeStyle : 'blue',
-					strokeWidth : 5
-				});
-				circle = new t.canvas.circle({
-					fill : 'green',
-					x : 70,
-					y: 50,
-					strokeStyle : 'blue',
-					radius : 20,
-					strokeWidth : 3,
-					opacity: 0.1,
-					end : 270
-				});
-				triangle = new t.canvas.triangle({
-					x: 100,
-					y: 100,
-					angle:0,
-					strokeStyle : 'blue',
-					strokeWidth : 5
-				});
-				ellipse = new t.canvas.ellipse({
-					x: 170,
-					y: 100,
-					xRadius: 30,
-					yRadius: 15,
-					angle:45,
-					strokeStyle : 'blue',
-					strokeWidth : 5,
-					end : 360
-				});
-				circle2 = new  t.canvas.circle({
-					x: 245,
-					y: 177.5,
-					fill:'red'
-				});
-				line = new t.canvas.line({
-					x : 170,
-					y : 30,
-					x2 : 200,
-					y2: 30,
-					angle:-10
-				});
-				image = new t.canvas.image({
-					x : 200,
-					y : 30,     
-					//angle:45,
-					flipX : true
-				});
-				polygon = new t.canvas.polygon({
-					points : [
-						{x : 200,y : 200},
-						{x : 250,y : 210},
-						{x : 280,y : 150},	
-						{x : 250,y : 150}
-					],
-					angle:0,
-					strokeStyle : 'green',
-					strokeWidth : 5,
-					opacity: 0.2,
-				});
-				cloneRect = rect.clone();
-				cloneRect.set('x',50);
-				image.on('render', function () {
-					console.log('render ' + this.name);
-					console.log('render');
-				});
-				image.on('change', function (name) {
-					console.log('chnage -> ' + name);
-				});
-				canvas.on('renderAll', function () {
-					console.log('renderAll');
-					//console.log(canvas.toImage());
-				});
-				canvas.add(rect,rect2,circle,triangle,ellipse,circle2,line,polygon,cloneRect,image);
-				canvas.renderAll();
-				console.log(canvas);
-
-				
-				canvas2 = t.dom("#canvas-2").first.getContext('2d');
-				cloneRect.renderTo(canvas2);
-				
-				t.animation({
-					startValue : 0,
-					endValue : 360,
-					duration: 10000,
-					onChange : function (value) {
-						polygon.set('angle',value);
-						canvas.renderAll();
-					},
-					onComplete : function () {
-						console.log('onComplete');
-					}
-				});
-				/*t.animation({
-					startValue : 0,
-					endValue : 360,
-					duration: 10000,
-					onChange : function (value) {
-						ellipse.set('angle',value);
-						canvas.renderAll();
-					},
-					onComplete : function () {
-						console.log('onComplete');
-					}
-				});
-				t.animation({
-					startValue : 100,
-					endValue : 300,
-					duration: 10000,
-					onChange : function (value) {
-						triangle.set('y',value);
-						canvas.renderAll();
-					},
-					onComplete : function () {
-						console.log('onComplete');
-					}
-				});
-				t.animation({
-					startValue : 0,
-					endValue : 360,
-					duration: 10000,
-					onChange : function (value) {
-						ellipse.set('angle',value);
-						canvas.renderAll();
-					},
-					onComplete : function () {
-						console.log('onComplete');
-					}
-				});*/
-				/*t.animation({
-					startValue : 1,
-					endValue : 360,
-					duration: 10000,
-					onChange : function (value) {
-						ellipse.set('angle',value);
-						canvas.renderAll();
-					},
-					onComplete : function () {
-						console.log('onComplete');
-					}
-				});*/
-				
-				/*var anim = t.animation({
-					startValue : 1,
-					endValue : 0,
-					duration: 5000,
-					onChange : function (value) {
-						triangle.set('opacity',value);
-						canvas.renderAll();						
-					},
-					onComplete : function () {
-						console.log('onComplete');
-					},
-					onAbort : function () {
-						console.log('onAbort');
-					}
-				});*/
-
-				//setInterval(function () {animal(image)},100);
-				//setInterval(function () {animal(line)},100);
-				//setInterval(function () {animal(circle)},100);
-				
+				canvas.add(text);
 			});
 		</script>
 	</body>

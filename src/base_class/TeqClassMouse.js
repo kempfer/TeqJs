@@ -40,6 +40,7 @@
 		onEvent : function (e) {
 			var name, func;
 			name = e.type;
+			console.log(name);
 			func = this.actions[this._eventList[name]];
 			if(t.isFunction(func)){
 				func.call(this,e);
@@ -66,7 +67,7 @@
 			out : function (e) {
 				this.set(e,false);
 			},
-			up: function (e) {
+			up: function () {
 				this.set(e,true);
 			}
 		},

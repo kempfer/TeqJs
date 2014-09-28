@@ -121,11 +121,14 @@
 				this.getScaleY() * (!t.isEmpty(this.getFlipY()) ? -1 : 1)
 			);
 		},
-		_showCenter : function () {
-		
-		},
 		isTransform : function () {
 			return (this.getAngle() || !t.isEmpty(this.getFlipX()) || !t.isEmpty(this.getFlipY()));
+		},
+		isActive : function () {
+			return this._active;
+		},
+		setActive : function (active) {
+			this._active = active;
 		}
 	});
 	t.canvas.object.options = {
@@ -144,7 +147,8 @@
 		shadowColor : false,
 		shadowOffsetX : false,
 		shadowOffsetY : false,
-		shadowBlur : false
+		shadowBlur : false,
+		selectable : true,
 	},
 	t.canvas.object.optionAnimated = ['x','y','width','height','scaleX','scaleY','opacity','angle'];
 })(window.t)
