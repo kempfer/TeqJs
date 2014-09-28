@@ -128,9 +128,9 @@
 			if(!t.dom.isElement(this.element.first)){
 				console.error('Not element');
 			}
-			this.listen();
+			this.keyListen();
 		},
-		onEvent : function (e) {
+		onKeyEvent : function (e) {
 			var name, type,fireEvent,
 				first = '';
 			type = e.type;
@@ -154,12 +154,12 @@
 				this.fire(fireEvent,e);
 			}
 		},
-		listen : function () {
+		keyListen : function () {
 			var events = [],key;
 			t.object.each(this._eventList, function (val,key) {
 				events.push(key);
 			});
-			this.element.bind(events.join(' '), this.onEvent.bind(this));
+			this.element.bind(events.join(' '), this.onKeyEvent.bind(this));
 		}
 	});
 	t.Base.Class.Keyboard.keyCodes = mapCodes;
