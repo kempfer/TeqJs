@@ -1,15 +1,15 @@
 (function (t) {
 	'use strict';
-	t.Class.define('t.canvas.line', {
+	t.Class.define('t.canvas.shapes.line', {
 
-		Extend : t.canvas.object,
+		Extend : t.canvas.shape,
 		/**
 		* Constructor
 		* @param {Object} [options] Options object
 		* @return {Object} thisArg
 		*/
 		init : function initTriangle (options) {
-			this.defaultOptions = t.canvas.line.options;
+			this.defaultOptions = t.canvas.shapes.line.options;
 			this.callParent(options);
 			this.set('width',Math.abs(this.originalOptions.x2 - this.originalOptions.x) || 1);
 			this.set('height',Math.abs(this.originalOptions.y2 - this.originalOptions.y) || this.getStrokeWidth());
@@ -31,7 +31,7 @@
 		}
 
 	});
-	t.canvas.line.options = t.combine (t.canvas.object.options, {
+	t.canvas.shapes.line.options = t.combine (t.canvas.shape.options, {
 		x: 50,
 		y: 50,
 		x2 : 60,

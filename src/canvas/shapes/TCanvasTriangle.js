@@ -1,9 +1,9 @@
 (function (t) {
 	'use strict';
 
-	t.Class.define('t.canvas.triangle', {
+	t.Class.define('t.canvas.shapes.triangle', {
 		
-		Extend : t.canvas.object,
+		Extend : t.canvas.shape,
 		
 		/**
 		* Constructor
@@ -11,7 +11,7 @@
 		* @return {Object} thisArg
 		*/
 		init : function initTriangle (options) {
-			this.defaultOptions = t.canvas.triangle.options;
+			this.defaultOptions = t.canvas.shapes.triangle.options;
 			this.callParent(options);
 		},
 		_render : function (ctx) {	
@@ -31,7 +31,7 @@
 		}
 	});
 
-	t.canvas.triangle.options = t.combine (t.canvas.object.options, {
+	t.canvas.shapes.triangle.options = t.combine (t.canvas.shape.options, {
 		width: 50,
 		height: 50,
 	});

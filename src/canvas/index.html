@@ -15,71 +15,34 @@
 		<script type="text/javascript"  src="../plugins/TeqAnimation.js"></script>
 		<script type="text/javascript"  src="../plugins/TeqClassMouse.js"></script>
 		<script type="text/javascript"  src="../base_class/TeqClassKeyboard.js"></script>
-		<script type="text/javascript"  src="TCanvas.js"></script>		
-		<script type="text/javascript"  src="TCanvasObj.js"></script>	
-		<script type="text/javascript"  src="TCanvasRect.js"></script>	
-		<script type="text/javascript"  src="TCanvasCircle.js"></script>
-		<script type="text/javascript"  src="TCanvasTriangle.js"></script>
-		<script type="text/javascript"  src="TCanvasEllipse.js"></script>
-		<script type="text/javascript"  src="TCanvasLine.js"></script>
-		<script type="text/javascript"  src="TCanvasImage.js"></script>
-		<script type="text/javascript"  src="TCanvasPolygon.js"></script>
-		<script type="text/javascript"  src="TCanvasText.js"></script>
+		<script type="text/javascript"  src="core/TCanvas.js"></script>		
+		<script type="text/javascript"  src="core/TCanvasShape.js"></script>	
+		<script type="text/javascript"  src="shapes/TCanvasRect.js"></script>	
+		<script type="text/javascript"  src="shapes/TCanvasCircle.js"></script>
+		<script type="text/javascript"  src="shapes/TCanvasTriangle.js"></script>
+		<script type="text/javascript"  src="shapes/TCanvasEllipse.js"></script>
+		<script type="text/javascript"  src="shapes/TCanvasLine.js"></script>
+		<script type="text/javascript"  src="shapes/TCanvasImage.js"></script>
+		<script type="text/javascript"  src="shapes/TCanvasPolygon.js"></script>
+		<script type="text/javascript"  src="shapes/TCanvasText.js"></script>
+		<script type="text/javascript"  src="TCanvasApp.js"></script>
 		
-		
+		<style>
+			canvas {
+				border : 1px solid;
+			}
+		</style>
 		
 	</head>
 	<body>
-		<canvas id="canvas" style="border: 1px solid;"> </canvas>
-		<div id="test"> </div>
-		<canvas id="canvas-2" style="border: 1px solid;"> </canvas>
 		<script>
-			var canvas;
-			var canvas2;
-			var rect;
-			var rect2;
-			var circle;
-			var triangle;
-			var ellipse;
-			var circle2;
-			var line; 
-			var image;
-			var polygon;
-			var cloneRect;
-			var text;
-			var keyboard;
+			var app;
 			t.dom.onReady(function () {
-				var a = {
-					get X () {
-						return 55;
-					}
-				}
-				var mouse = new t.Base.Class.Mouse('#canvas');
-				/*mouse.on('move', function (e) {
-					console.log(this.delta);
-					console.log(e.delta);
-				});*/
-				mouse.on('wheel', function (e) {
-					console.log(this.point);
-					console.log(e.delta);
-				});
-				keyboard = new t.Base.Class.Keyboard('body');
-				keyboard.on('ctrl c:up', function (e) {
-					console.log('ctrl c:up');
-				});
-				keyboard.on('ctrl alt z:up', function (e) {
-					console.log('ctrl alt z:up');
-				});
-				//keyboard
-				//return; 
-				canvas = new t.canvas('#canvas');	
-				canvas.width = 400;			
-				canvas.height = 400;				
-				canvas.renderTo("#test");
-
-				text = new t.canvas.text({
-					x : 70,
-					y : 70,
+				app = new t.AppCanvas();
+				
+				text = new t.canvas.shapes.text({
+					x : 0,
+					y : 0,
 					color:'red',
 					fontSize : 30,
 					text : 'Teq Canvas Text<br>New line',
@@ -87,7 +50,7 @@
 					fill: false,
 					fontFamily : 'Arial'
 				});
-				canvas.add(text);
+				app.addShapes(text);
 			});
 		</script>
 	</body>

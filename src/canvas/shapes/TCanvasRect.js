@@ -1,12 +1,12 @@
 (function (t) {
 	'use strict';
 	
-	t.Class.define('t.canvas.rect',{
+	t.Class.define('t.canvas.shapes.rect',{
 	
-		Extend : t.canvas.object,
+		Extend : t.canvas.shape,
 		
 		init : function (options) {
-			this.defaultOptions = t.canvas.rect.options;
+			this.defaultOptions = t.canvas.shapes.rect.options;
 			this.callParent(options);
 		},
 		_render : function (ctx) {	
@@ -24,7 +24,7 @@
 		}
 	});
 
-	t.canvas.rect.options = t.combine (t.canvas.object.options, {
+	t.canvas.shapes.rect.options = t.combine (t.canvas.shape.options, {
 		width: 1,
 		height: 1,
 	});

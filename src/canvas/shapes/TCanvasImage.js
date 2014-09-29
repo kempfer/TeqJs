@@ -1,9 +1,9 @@
 (function (t) {
 	'use strict';
 	
-	t.Class.define('t.canvas.image', {
+	t.Class.define('t.canvas.shapes.image', {
 		
-		Extend : t.canvas.object,
+		Extend : t.canvas.shape,
 
 		_img : null,
 		
@@ -13,7 +13,7 @@
 		* @return {Object} thisArg
 		*/
 		init : function initTriangle (options) {
-			this.defaultOptions = t.canvas.image.options;
+			this.defaultOptions = t.canvas.shapes.image.options;
 			this.callParent(options);
 			this.loadImage();
 		},
@@ -55,7 +55,7 @@
 		}
 	});
 
-	t.canvas.image.options = t.combine (t.canvas.object.options, {
+	t.canvas.shapes.image.options = t.combine (t.canvas.shape.options, {
 		src : 'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg',
 		width : 100,
 		height : 100

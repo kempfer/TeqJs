@@ -1,7 +1,7 @@
 (function (t) {
 	'use strict';
 
-	t.Class.define('t.canvas.object', {
+	t.Class.define('t.canvas.shape', {
 
 		Implements : [t.Base.Class.Event],
 		
@@ -131,7 +131,7 @@
 			this._active = active;
 		}
 	});
-	t.canvas.object.options = {
+	t.canvas.shape.options = {
 		x : 0,
 		y : 0,	
 		fill : '#000000',
@@ -150,5 +150,5 @@
 		shadowBlur : false,
 		selectable : true,
 	},
-	t.canvas.object.optionAnimated = ['x','y','width','height','scaleX','scaleY','opacity','angle'];
+	t.canvas.shape.optionAnimated = ['x','y','width','height','scaleX','scaleY','opacity','angle'];
 })(window.t)

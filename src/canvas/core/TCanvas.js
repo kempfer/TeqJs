@@ -7,7 +7,7 @@
 		_el : null,
 		_ctx : null,
 		
-		objects : {},
+		shapes : {},
 
 		init : function (selector) {
 			var el = t.dom(selector); 
@@ -23,7 +23,7 @@
 		get context () {
 			return this._ctx;
 		},
-		renderTo : function (selector) {
+		appendTo : function (selector) {
 			t.dom(selector).append(t.dom(this._canvas));
 			return this;
 		},
@@ -45,23 +45,24 @@
 				obj = arguments[i];
 				obj.id = t.uniqueId();
 				obj.context = this._ctx;
-				this.objects[obj.id] = obj;
+				this.shapes[obj.id] = obj;
 			}
 			this.renderAll();
 		},
-		removeObj : function (object) {
+		removeShapes : function () {
+			t.object.each()
 			object.remove(this.context);
 		},
-		renderObj : function (object) {
+		renderShapes : function (object) {
 			this.renderAll();
 		},
 		renderAll : function () {
 			//console.time('renderAll'); 
 			this.clear();
 			var buffer = t.canvas.buffer(this.width,this.height);
-			for(var key in this.objects) {
-				this.objects[key].render(buffer);
-			}		
+			t.object.each(this.shapes, function (val,key) {
+				val.render(buffer);
+			});		
 			this._ctx.drawImage(buffer.canvas, 0, 0);
 			this.fire('renderAll');
 			//console.timeEnd('renderAll');

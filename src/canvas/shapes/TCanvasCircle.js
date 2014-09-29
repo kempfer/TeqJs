@@ -1,12 +1,12 @@
 (function (t) {
 	'use strict';
 	
-	t.Class.define('t.canvas.circle', {
+	t.Class.define('t.canvas.shapes.circle', {
 
-		Extend : t.canvas.object,
+		Extend : t.canvas.shape,
 		
 		init : function (options) {
-			this.defaultOptions = t.canvas.circle.options;
+			this.defaultOptions = t.canvas.shapes.circle.options;
 			this.callParent(options);
 		},
 		set: function (key, val, fire) {
@@ -40,7 +40,7 @@
 	});
 
 
-	t.canvas.circle.options = t.combine (t.canvas.object.options, {
+	t.canvas.shapes.circle.options = t.combine (t.canvas.shape.options, {
 		radius: 5,
 		start: 0,
 		end : 360

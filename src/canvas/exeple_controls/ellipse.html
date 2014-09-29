@@ -14,15 +14,16 @@
 		<script type="text/javascript"  src="../../plugins/TeqPromise.js"></script>	
 		<script type="text/javascript"  src="../../plugins/TeqAnimation.js"></script>
 		<script type="text/javascript"  src="../../plugins/TeqForm.js"></script>
-		<script type="text/javascript"  src="../TCanvas.js"></script>		
-		<script type="text/javascript"  src="../TCanvasObj.js"></script>	
-		<script type="text/javascript"  src="../TCanvasRect.js"></script>	
-		<script type="text/javascript"  src="../TCanvasCircle.js"></script>
-		<script type="text/javascript"  src="../TCanvasTriangle.js"></script>
-		<script type="text/javascript"  src="../TCanvasEllipse.js"></script>
-		<script type="text/javascript"  src="../TCanvasLine.js"></script>
-		<script type="text/javascript"  src="../TCanvasImage.js"></script>
-		<script type="text/javascript"  src="../TCanvasPolygon.js"></script>
+		<script type="text/javascript"  src="../core/TCanvas.js"></script>		
+		<script type="text/javascript"  src="../core/TCanvasShape.js"></script>	
+		<script type="text/javascript"  src="../shapes/TCanvasRect.js"></script>	
+		<script type="text/javascript"  src="../shapes/TCanvasCircle.js"></script>
+		<script type="text/javascript"  src="../shapes/TCanvasTriangle.js"></script>
+		<script type="text/javascript"  src="../shapes/TCanvasEllipse.js"></script>
+		<script type="text/javascript"  src="../shapes/TCanvasLine.js"></script>
+		<script type="text/javascript"  src="../shapes/TCanvasImage.js"></script>
+		<script type="text/javascript"  src="../shapes/TCanvasPolygon.js"></script>
+		<script type="text/javascript"  src="../shapes/TCanvasText.js"></script>
 		
 		<style>
 			#canvas {
@@ -89,7 +90,7 @@
 			var ellipse;
 			t.dom.onReady(function () {
 				var canvas = new t.canvas('#canvas');
-				ellipse = new t.canvas.ellipse({
+				ellipse = new t.canvas.shapes.ellipse({
 					x:0,
 					y:0, 
 					xRadius : 20,

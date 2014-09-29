@@ -1,12 +1,12 @@
 (function (t) {
 	'use strict';
 	
-	t.Class.define('t.canvas.text',{
+	t.Class.define('t.canvas.shapes.text',{
 	
-		Extend : t.canvas.object,
+		Extend : t.canvas.shape,
 		
 		init : function (options) {
-			this.defaultOptions = t.canvas.text.options;
+			this.defaultOptions = t.canvas.shapes.text.options;
 			this.callParent(options);
 			this.set('width',this.getMaxWidth() || this._getWidth());
 			this.set('height',this._getHeight());
@@ -94,7 +94,7 @@
 		} 
 	});
 
-	t.canvas.text.options = t.combine (t.canvas.object.options, {
+	t.canvas.shapes.text.options = t.combine (t.canvas.shape.options, {
 		x : 0,
 		y : 0,
 		text: 'Teq Canvas Text',
