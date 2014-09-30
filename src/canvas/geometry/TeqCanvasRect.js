@@ -2,41 +2,31 @@
 
 	'use strict';
 	
-	t.Class.define('t.geometry.rect',{
-	
-		init : function (options) {
-			//this.defaultOptions = t.canvas.shapes.rect.options;
-			//this.callParent(options);
-		},
-		form: function () {
-			
-		},
-		to: function () {
-			
-		},
-		center : function () {
-			
-		},
-		hasPoint : function () {
-			
-		}
-	});
-	
-	t.geometry.rect.getCenter = function (x,y,w,h) {
+	if(!t.geometry){
+		t.geometry = {};
+	};
+		
+	t.geometry.rect.getCenter = function getCenter (rect) {
 		return {
-			x : x + (x + w - x)/2,
-			y : y + (y + h - y)/2
+			x : rect.x + (rect.x + rect.w - rect.x)/2,
+			y : rect.y + (rect.y + rect.h - rect.y)/2
 		};
 	};
-	t.geometry.rect.getVertices = function (x,y,w,h) {
+	t.geometry.rect.getVertices = function getVertices (rect) {
 		return [
-			{ x : x, y : y},
-			{ x : x + w, y :y},
-			{ x : x + w, y :y + h},
-			{ x : x, y :y + h},
+			{ x : rect.x, y : rect.y},
+			{ x : rect.x + rect.w, y : rect.y},
+			{ x : rect.x + rect.w, y : rect.y + rect.h},
+			{ x : rect.x, y :rect.y + rect.h},
 		];
 	};
-	t.geomery.rect.intersects = function (rect,rect2) {
+	t.geomery.rect.intersects = function  intersects (rect,rect2) {
 		
+	};
+	t.geomery.rect.hasPoint = function hasPoint  (point, rect){
+		
+	};
+	t.geomery.rect.area = function area (rect) {
+		return rect.w * rect.h;
 	};
 })(window.t);
