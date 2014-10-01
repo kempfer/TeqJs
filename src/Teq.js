@@ -44,24 +44,13 @@ var Teq = {
 	*
 	*
 	**/
-	isArrayLike: function (item) {
-		return item && (Array.isArray(item) || (
-				typeof item != 'string' &&
-				!t.isFunction(item) &&
-				typeof item.nodeName != 'string' &&
-				typeof item.length == 'number'
-		));
-	},
-	/**
-	*
-	*
-	**/
 	isEmpty : function (item) {
 		return 	(item === false ) 									||
 				(item === 0) 										||
 				(item === null)										||
 				(item === undefined )								||
 				(Teq.isArray(item) && item.length === 0) 			||
+				(item === "" )										||
 				(t.isObject(item) && Object.keys(item).length === 0);
 	},
 	/**
