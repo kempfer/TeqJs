@@ -25,6 +25,7 @@
 		<script type="text/javascript"  src="../shapes/TCanvasPolygon.js"></script>
 		<script type="text/javascript"  src="../shapes/TCanvasText.js"></script>
 		<script type="text/javascript"  src="../shapes/TCanvasRoundedRect.js"></script>
+		<script type="text/javascript"  src="../geometry/TeqRect.js"></script>
 		<style>
 			#canvas {
 				float : left;
@@ -77,8 +78,8 @@
 			t.dom.onReady(function () {
 				var canvas = new t.canvas('#canvas');
 				roundedRect = new t.canvas.shapes.roundedRect({
-					x : 100,
-					y : 100,
+					x : 0,
+					y : 0,
 					radius : 10,
 					width: 100,
 					height: 100,

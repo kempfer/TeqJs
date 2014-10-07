@@ -7,8 +7,8 @@
 	
 		getCenter : function getCenter (rect) {
 			return {
-				x : rect.x + (rect.x + rect.w - rect.x)/2,
-				y : rect.y + (rect.y + rect.h - rect.y)/2
+				x : rect.x + rect.w/2,
+				y : rect.y + rect.h/2
 			};
 		},
 		getVertices : function getVertices (rect) {

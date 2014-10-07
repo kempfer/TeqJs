@@ -71,13 +71,7 @@
 			}
 		},
 		getCenter : function () {
-			var rect = this.getRect();
-			return t.canvas.centerRectangle(
-				rect.x ,
-				rect.y ,
-				rect.w,
-				rect.h
-			);
+			return t.geometry.rect.getCenter(this.getRect());
 		},
 		getRect : function () {
 			return {
