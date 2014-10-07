@@ -25,6 +25,7 @@
 		<script type="text/javascript"  src="shapes/TCanvasImage.js"></script>
 		<script type="text/javascript"  src="shapes/TCanvasPolygon.js"></script>
 		<script type="text/javascript"  src="shapes/TCanvasText.js"></script>
+		<script type="text/javascript"  src="shapes/TCanvasRoundedRect.js"></script>
 		<script type="text/javascript"  src="geometry/TeqRect.js"></script>
 		<script type="text/javascript"  src="geometry/TeqCircle.js"></script>
 		<script type="text/javascript"  src="TCanvasApp.js"></script>
@@ -39,6 +40,7 @@
 	<body>
 		<script>
 			var app;
+			var roundedRect;
 			t.dom.onReady(function () {
 				app = new t.AppCanvas();
 				
@@ -53,7 +55,33 @@
 					radius : 2,
 					fill:'green'
 				});
-				app.addShapes(circle,circle2);
+				roundedRect = new t.canvas.shapes.roundedRect({
+					x : 100,
+					y : 100,
+					radius : 10,
+					width: 100,
+					height: 100,
+					fill:'green'
+				});
+				app.addShapes(roundedRect);
+				t.animation({
+						startValue : 1,
+						endValue : 50,
+						duration: 2000,
+						onChange : function (value) {
+							roundedRect.set('radius',value);
+							app.canvas.renderAll();
+						}
+				});
+				t.animation({
+						startValue : 0,
+						endValue : 360,
+						duration: 2000,
+						onChange : function (value) {
+							roundedRect.set('angle',value);
+							app.canvas.renderAll();
+						}
+				});
 			});
 		</script>
 	</body>
