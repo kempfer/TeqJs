@@ -25,6 +25,8 @@
 		<script type="text/javascript"  src="shapes/TCanvasImage.js"></script>
 		<script type="text/javascript"  src="shapes/TCanvasPolygon.js"></script>
 		<script type="text/javascript"  src="shapes/TCanvasText.js"></script>
+		<script type="text/javascript"  src="geometry/TeqRect.js"></script>
+		<script type="text/javascript"  src="geometry/TeqCircle.js"></script>
 		<script type="text/javascript"  src="TCanvasApp.js"></script>
 		
 		<style>
@@ -40,17 +42,18 @@
 			t.dom.onReady(function () {
 				app = new t.AppCanvas();
 				
-				text = new t.canvas.shapes.text({
-					x : 0,
-					y : 0,
-					color:'red',
-					fontSize : 30,
-					text : 'Teq Canvas Text<br>New line',
-					stroke : true,
-					fill: false,
-					fontFamily : 'Arial'
+				circle = new t.canvas.shapes.circle({
+					x : 100,
+					y : 100,
+					radius : 20
 				});
-				app.addShapes(text);
+				circle2 = new t.canvas.shapes.circle({
+					x : 140 -2,
+					y : 120 -2,
+					radius : 2,
+					fill:'green'
+				});
+				app.addShapes(circle,circle2);
 			});
 		</script>
 	</body>
