@@ -26,6 +26,7 @@
 		<script type="text/javascript"  src="shapes/TCanvasPolygon.js"></script>
 		<script type="text/javascript"  src="shapes/TCanvasText.js"></script>
 		<script type="text/javascript"  src="shapes/TCanvasRoundedRect.js"></script>
+		<script type="text/javascript"  src="shapes/TCanvasPath.js"></script>
 		<script type="text/javascript"  src="geometry/TeqRect.js"></script>
 		<script type="text/javascript"  src="geometry/TeqCircle.js"></script>
 		<script type="text/javascript"  src="TCanvasApp.js"></script>
@@ -41,10 +42,26 @@
 		<script>
 			var app;
 			var roundedRect;
+			var path;
 			t.dom.onReady(function () {
 				app = new t.AppCanvas();
 				
-				circle = new t.canvas.shapes.circle({
+				path = new t.canvas.shapes.path({
+					parts : [
+						{ method : 'moveTo', points : [ {x : 170, y :80}]},
+						{ method : 'curveTo', points : [ {x : 130, y : 100} , {x : 130, y :150}, {x : 230, y :150}]},
+						{ method : 'curveTo', points : [ {x : 250, y : 180} , {x : 320, y :180}, {x : 340, y :150}]},
+						{ method : 'curveTo', points : [ {x : 420, y : 150} , {x : 420, y :120}, {x : 390, y :100}]},
+						{ method : 'curveTo', points : [ {x : 430, y : 40} , {x : 370, y :30}, {x : 340, y :50}]},
+						{ method : 'curveTo', points : [ {x : 320, y : 5} , {x : 250, y :20}, {x : 250, y :50}]},
+						{ method : 'curveTo', points : [ {x : 200, y : 5} , {x : 150, y :20}, {x : 170, y :80}]}
+					],
+					fill : 'blue',
+					strokeWidth : 5
+				});
+				
+				app.addShapes(path);
+				/*circle = new t.canvas.shapes.circle({
 					x : 100,
 					y : 100,
 					radius : 20
@@ -81,7 +98,7 @@
 							roundedRect.set('angle',value);
 							app.canvas.renderAll();
 						}
-				});
+				});*/
 			});
 		</script>
 	</body>

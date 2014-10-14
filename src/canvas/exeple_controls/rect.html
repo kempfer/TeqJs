@@ -72,12 +72,16 @@
 			var rect;
 			t.dom.onReady(function () {
 				var canvas = new t.canvas('#canvas');
+				var grd = canvas.context.createRadialGradient(238, 50, 10, 238, 50, 300);
+				grd.addColorStop(0, '#8ED6FF');
+				// dark blue
+				grd.addColorStop(1, '#004CB3');
 				rect = new t.canvas.shapes.rect({
 					x:0,
 					y:0, 
-					width :20,
-					height:20,
-					fill:'green'
+					width :300,
+					height:100,
+					fill:grd
 				});
 				canvas.add(rect);
 				var xControl = t.dom('#x-control');

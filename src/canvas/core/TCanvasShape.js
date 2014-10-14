@@ -143,6 +143,8 @@
 		shadowOffsetY : false,
 		shadowBlur : false,
 		selectable : true,
+		lineJoin : 'miter', // miter || round || bevel,
+		lineCap : 'butt' // || round || square
 	},
 	t.canvas.shape.optionAnimated = ['x','y','width','height','scaleX','scaleY','opacity','angle'];
 })(window.t)
