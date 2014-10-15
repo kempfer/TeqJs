@@ -312,7 +312,7 @@
 		},
 		factory : function () {
 			factory = true;			
-			return new this(arguments);
+			return new this(arguments[0]);
 		}
 	},
 	construct = function (Constructor, args){

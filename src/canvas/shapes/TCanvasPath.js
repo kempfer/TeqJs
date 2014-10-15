@@ -7,7 +7,7 @@
 			new Error('unknown method -> ' + part.method);
 		}
 		this.method = part.method;
-		this.points = part.points;
+		this.points = part.points.map(t.canvas.point);
 		return this;
 	};
 	
@@ -19,8 +19,16 @@
 		init : function (options) {
 			this.defaultOptions = t.canvas.shapes.path.options;
 			this.callParent(options);
+			var rect = this.getRect();
+			this.originalOptions.x = rect.x;
+			this.originalOptions.x = rect.y;
+			this.set('x',rect.x);
+			this.set('y',rect.y);
+			this.set('width',rect.w);
+			this.set('height',rect.h);
 		},
 		set : function (key,val, fire) {
+			this.callParent(key,val, fire);
 			if(key == 'parts'){
 				var i;
 				this.options['parts'] = [];
@@ -28,7 +36,6 @@
 					this.push(val[i]);
 				}
 			}
-			this.callParent(key,val, fire);
 			return this;
 		},
 		get length () {
@@ -47,7 +54,8 @@
 			this.push( part);
 		},
 		push : function (part) {
-			return  this.getParts().push(new pathPart(part));
+			this.getParts().push(new pathPart(part));
+			return this;
 		},
 		unshift : function (part) {
 			this.getParts().unshift(part);
@@ -58,6 +66,42 @@
 		},
 		shift : function () {
 			return this.getParts().shift();
+		},
+		get points () {
+			var i,k, part,
+				points = [], parts = this.getParts();
+			for(i = 0; i < parts.length; i++) {
+				part = parts[i];
+				for(k = 0; k < part.points.length; k++) {
+					t.array.include(points,part.points[k]);
+				}
+			}
+			return points;
+		},
+		getRect : function () {
+			var from, to,
+				points = this.points,
+				length = points.length;
+			while(length--){
+				if(from){
+					from.x = Math.min(from.x, points[length].x);
+					from.y = Math.min(from.y, points[length].y);
+					to.x = Math.max(to.x, points[length].x);
+					to.y = Math.max(to.y, points[length].y);
+					
+				}
+				else{
+					from = points[length].clone();
+					to = points[length].clone();
+				}
+				
+			}
+			return {
+				x : from.x,
+				y : from.y,
+				w : (to.x - from.x) * this.getScaleX(),
+				h : (to.y - from.y) * this.getScaleY()
+			};
 		},
 		_render : function (ctx) {	
 			var i,part,
@@ -83,7 +127,15 @@
 			this._renderStroke(ctx);
 		},
 		_counted : function () {
-			
+			var center;
+			if(this.isTransform()) {
+				center = this.getCenter();
+				console.log(center);
+				this.points.map(function (point) {
+					point.x = point.x - center.x - (this.originalOptions.x - this.getX());
+					point.y = point.y - center.y - (this.originalOptions.x - this.getY());
+				}.bind(this));
+			}
 		}
 	});
 	t.canvas.shapes.path.options = t.combine (t.canvas.shape.options, {
