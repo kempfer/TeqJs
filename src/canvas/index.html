@@ -44,6 +44,7 @@
 			var app;
 			var roundedRect;
 			var path;
+			var rect;
 			t.dom.onReady(function () {
 				app = new t.AppCanvas();
 				
@@ -69,7 +70,16 @@
 							app.canvas.renderAll();
 						}
 				});
-				app.addShapes(path);
+				rect = new t.canvas.shapes.rect({
+					x : 130,
+					y : 5,					
+					width: 300,
+					height: 175,
+					fill: false,
+					strokeStyle : '#000'
+					
+				}); 
+				app.addShapes(path,rect);
 				/*circle = new t.canvas.shapes.circle({
 					x : 100,
 					y : 100,

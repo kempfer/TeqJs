@@ -21,7 +21,7 @@
 			this.callParent(options);
 			var rect = this.getRect();
 			this.originalOptions.x = rect.x;
-			this.originalOptions.x = rect.y;
+			this.originalOptions.y = rect.y;
 			this.set('x',rect.x);
 			this.set('y',rect.y);
 			this.set('width',rect.w);
@@ -104,9 +104,9 @@
 			};
 		},
 		_render : function (ctx) {	
-			var i,part,
-				parts = this.getParts();
-			this._counted();
+			var i,part,parts;
+				this._counted();
+				parts = this._parts;
 			ctx.beginPath();
 			for(i = 0; i < parts.length; i++) {
 				part = parts[i];
@@ -127,15 +127,30 @@
 			this._renderStroke(ctx);
 		},
 		_counted : function () {
-			var center;
-			if(this.isTransform()) {
-				center = this.getCenter();
-				console.log(center);
-				this.points.map(function (point) {
-					point.x = point.x - center.x - (this.originalOptions.x - this.getX());
-					point.y = point.y - center.y - (this.originalOptions.x - this.getY());
-				}.bind(this));
-			}
+			var center, part,i,points,
+				parts = this.getParts();
+			this._parts = [];
+			for(i = 0; i < parts.length; i++) {
+				part = parts[i];				
+				if(this.isTransform()) {
+					center = this.getCenter();											
+					points = part.points.map(function (point) {						
+						point = point.clone();
+						point.x = point.x - center.x - (this.originalOptions.x - this.getX());
+						point.y = point.y - center.y - (this.originalOptions.y - this.getY());												
+						return point;
+					}.bind(this));
+				}
+				else{
+					points = part.points.map(function (point) {
+						point = point.clone();						
+						point.x = point.x  - (this.originalOptions.x - this.getX());
+						point.y = point.y - (this.originalOptions.y - this.getY());
+						return point;
+					}.bind(this));
+				}				
+				this._parts.push(new pathPart({ method : part.method, points :  points}));
+			}					
 		}
 	});
 	t.canvas.shapes.path.options = t.combine (t.canvas.shape.options, {
