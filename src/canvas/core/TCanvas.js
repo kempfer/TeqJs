@@ -45,6 +45,7 @@
 				obj = arguments[i];
 				obj.id = t.uniqueId();
 				obj.context = this._ctx;
+				obj.layer = this;
 				this.shapes[obj.id] = obj;
 			}
 			this.renderAll();

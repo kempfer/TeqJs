@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Teq Canvas Lib</title>
+		<script type="text/javascript"  src="../../Teq.js"></script>		
+		<script type="text/javascript"  src="../../types/TeqArray.js"></script>
+		<script type="text/javascript"  src="../../plugins/TeqDom.js"></script>
+		<script type="text/javascript"  src="../../types/TeqNumber.js"></script>
+		<script type="text/javascript"  src="../../types/TeqObject.js"></script>
+		<script type="text/javascript"  src="../../types/TeqString.js"></script>	
+		<script type="text/javascript"  src="../../class/TeqClass.js"></script>								
+		<script type="text/javascript"  src="../../class/TeqBasesClass.js"></script>	
+		<script type="text/javascript"  src="../../plugins/TeqPromise.js"></script>	
+		<script type="text/javascript"  src="../../plugins/TeqAnimation.js"></script>
+		<script type="text/javascript"  src="../../class/TeqClassMouse.js"></script>
+		<script type="text/javascript"  src="../../class/TeqClassKeyboard.js"></script>
+		<script type="text/javascript"  src="../core/TCanvas.js"></script>		
+		<script type="text/javascript"  src="../core/TCanvasShape.js"></script>	
+		<script type="text/javascript"  src="../core/TCanvasPoint.js"></script>
+		<script type="text/javascript"  src="../shapes/TCanvasRect.js"></script>	
+		<script type="text/javascript"  src="../shapes/TCanvasCircle.js"></script>
+		<script type="text/javascript"  src="../shapes/TCanvasTriangle.js"></script>
+		<script type="text/javascript"  src="../shapes/TCanvasEllipse.js"></script>
+		<script type="text/javascript"  src="../shapes/TCanvasLine.js"></script>
+		<script type="text/javascript"  src="../shapes/TCanvasImage.js"></script>
+		<script type="text/javascript"  src="../shapes/TCanvasPolygon.js"></script>
+		<script type="text/javascript"  src="../shapes/TCanvasText.js"></script>
+		<script type="text/javascript"  src="../shapes/TCanvasRoundedRect.js"></script>
+		<script type="text/javascript"  src="../shapes/TCanvasPath.js"></script>
+		<script type="text/javascript"  src="../geometry/TeqRect.js"></script>
+		<script type="text/javascript"  src="../geometry/TeqCircle.js"></script>
+		<script type="text/javascript"  src="../TCanvasApp.js"></script>
+		
+		<style>
+			canvas {
+				border : 1px solid;
+			}
+		</style>
+		
+	</head>
+	<body>
+		<script>
+			var app;
+			var roundedRect;
+			var path;
+			var rect;
+			var keyboard;
+			t.dom.onReady(function () {
+				app = new t.AppCanvas();
+				
+				rect = new t.canvas.shapes.rect({
+					x : 130,
+					y : 5,					
+					width: 100,
+					height: 175,
+					fill: 'blue',
+					strokeStyle : '#000'
+					
+				}); 
+				app.addShapes(rect);
+				
+				
+				keyboard = new t.Base.Class.Keyboard('body');
+				// move left
+				keyboard.on('aleft', function () {
+					rect.move(-1);
+				});
+				// move right
+				keyboard.on('aright', function () {
+					rect.move(1);
+				});
+				// move up
+				keyboard.on('aup', function () {
+					rect.move(0,-1);
+				});
+				// move down
+				keyboard.on('adown', function () {
+					rect.move(0,1);
+				});
+				// rotate left
+				keyboard.on('ctrl aleft', function () {
+					rect.rotate(-1);
+				});
+				// rotate right
+				keyboard.on('ctrl aright', function () {
+					rect.rotate(1);
+				});
+				
+				// zoom +
+				keyboard.on('ctrl npplus', function () {
+					rect.zoom(0.1);
+				});
+				// zoom -
+				keyboard.on('ctrl nphyphen', function () {
+					rect.zoom(-0.1);
+				});
+				
+			});
+		</script>
+	</body>
+</html>

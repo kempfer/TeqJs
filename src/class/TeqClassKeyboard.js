@@ -131,6 +131,7 @@
 			this.keyListen();
 		},
 		onKeyEvent : function (e) {
+			e.preventDefault();
 			var name, type,fireEvent,
 				first = '';
 			type = e.type;

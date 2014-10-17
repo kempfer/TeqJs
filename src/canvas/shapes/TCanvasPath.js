@@ -130,6 +130,7 @@
 			var center, part,i,points,
 				parts = this.getParts();
 			this._parts = [];
+			console.log(this.getX());
 			for(i = 0; i < parts.length; i++) {
 				part = parts[i];				
 				if(this.isTransform()) {

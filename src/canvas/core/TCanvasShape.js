@@ -91,6 +91,38 @@
 			var rect = this.getRect();
 			context.clearRect(rect.x,rect.y,rect.w,rect.h);
 		},
+		/** @returns {boolean} */
+		hasPoint : function () {
+			var point = t.canvas.point.apply(null,arguments);
+			return t.geometry.rect.hasPoint(this.getRect(),point);
+		},
+		/** @returns {boolean} */
+		intersects : function (shape) {
+			if(!(shape instanceof t.canvas.shape )){
+				return false;
+			}
+			return t.geometry.rect.intersects(this.getRect(),shape.getRect());
+		},
+		move : function (diffX,diffY) {
+			var x = diffX || 0,
+				y = diffY || 0;
+			this.set('x', this.getX() + x)
+				.set('y', this.getY() + y)
+			this.layer.renderShapes(this);
+			return;
+		},
+		rotate : function (degrees) {
+			degrees = degrees || 0;
+			this.set('angle', this.getAngle() + degrees);
+			this.layer.renderShapes(this);
+			return this;
+		},
+		zoom : function (zoom) {
+			zoom = zoom || 0;
+			this.set('scaleX', this.getScaleX() + zoom);
+			this.set('scaleY', this.getScaleY() + zoom);
+			this.layer.renderShapes(this);
+		},
 		_renderFill : function (ctx) {
 			if(this.getFill()){
 				ctx.fillStyle = this.getFill();
