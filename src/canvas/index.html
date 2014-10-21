@@ -17,6 +17,7 @@
 		<script type="text/javascript"  src="../class/TeqClassKeyboard.js"></script>
 		<script type="text/javascript"  src="core/TCanvas.js"></script>		
 		<script type="text/javascript"  src="core/TCanvasShape.js"></script>	
+		<script type="text/javascript"  src="core/TCanvasContext2D.js"></script>	
 		<script type="text/javascript"  src="core/TCanvasPoint.js"></script>
 		<script type="text/javascript"  src="shapes/TCanvasRect.js"></script>	
 		<script type="text/javascript"  src="shapes/TCanvasCircle.js"></script>
@@ -46,8 +47,13 @@
 			var path;
 			var rect;
 			var keyboard;
+			var canvas;
+			var tcontext2D;
 			t.dom.onReady(function () {
 				app = new t.AppCanvas();
+				canvas = document.getElementsByTagName('canvas')[0];
+				tcontext2D = canvas.getContext('2d-t');
+			
 				
 				path = new t.canvas.shapes.path({
 					parts : [
@@ -62,100 +68,11 @@
 					fill : 'blue',
 					strokeWidth : 5
 				});
-				/*t.animation({
-						startValue : 0,
-						endValue : 360,
-						duration: 2000,
-						onChange : function (value) {
-							path.set('angle',value);
-							app.canvas.renderAll();
-						}
-				});*/
-				rect = new t.canvas.shapes.rect({
-					x : 130,
-					y : 5,					
-					width: 100,
-					height: 175,
-					fill: 'blue',
-					strokeStyle : '#000'
-					
-				}); 
-				app.addShapes(rect);
-				
-				
-				keyboard = new t.Base.Class.Keyboard('body');
-				// move left
-				keyboard.on('aleft', function () {
-					rect.move(-1);
-				});
-				// move right
-				keyboard.on('aright', function () {
-					rect.move(1);
-				});
-				// move up
-				keyboard.on('aup', function () {
-					rect.move(0,-1);
-				});
-				// move down
-				keyboard.on('adown', function () {
-					rect.move(0,1);
-				});
-				// rotate left
-				keyboard.on('ctrl aleft', function () {
-					rect.rotate(-1);
-				});
-				// rotate right
-				keyboard.on('ctrl aright', function () {
-					rect.rotate(1);
-				});
-				
-				// zoom +
-				keyboard.on('ctrl npplus', function () {
-					rect.zoom(0.1);
-				});
-				// zoom -
-				keyboard.on('ctrl nphyphen', function () {
-					rect.zoom(-0.1);
-				});
-				
-				/*circle = new t.canvas.shapes.circle({
-					x : 100,
-					y : 100,
-					radius : 20
-				});
-				circle2 = new t.canvas.shapes.circle({
-					x : 140 -2,
-					y : 120 -2,
-					radius : 2,
-					fill:'green'
-				});
-				roundedRect = new t.canvas.shapes.roundedRect({
-					x : 100,
-					y : 100,
-					radius : 10,
-					width: 100,
-					height: 100,
-					fill:'green'
-				});
-				app.addShapes(roundedRect);
-				t.animation({
-						startValue : 1,
-						endValue : 50,
-						duration: 2000,
-						onChange : function (value) {
-							roundedRect.set('radius',value);
-							app.canvas.renderAll();
-						}
-				});
-				t.animation({
-						startValue : 0,
-						endValue : 360,
-						duration: 2000,
-						onChange : function (value) {
-							roundedRect.set('angle',value);
-							app.canvas.renderAll();
-						}
-				});*/
+				app.addShapes(path);
+				tcontext2D
+					.arc(100, 100, 5, 0, 2 * Math.PI, false)
+					.rect(10,10,50,50)
+					.fill();
 			});
 		</script>
 	</body>

@@ -17,7 +17,7 @@
 			else{
 				this._canvas = t.dom.create('canvas').first;
 			}
-			this._ctx = this._canvas.getContext('2d');
+			this._ctx = this._canvas.getContext('2d-t');
 			return this;
 		},
 		get context () {
