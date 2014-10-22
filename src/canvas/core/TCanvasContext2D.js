@@ -106,6 +106,12 @@
 		set strokeStyle (value) {
 			return this.originalCtx2D.strokeStyle = value;
 		},
+		get fillStyle () {
+			return this.originalCtx2D.fillStyle;
+		},
+		set fillStyle (value) {
+			return this.originalCtx2D.fillStyle = value;
+		},
 		get textAlign () {
 			return this.originalCtx2D.textAlign;
 		},
@@ -193,8 +199,17 @@
 		drawImageFromRect : function () {
 			return this.original('drawImageFromRect',arguments);
 		},
-		ellipse : function () {
-			//TODO Реализовать этот метод
+		ellipse : function (cx,cy,rx,ry,start,end,counterclockwise) {
+			if(!this.originalCtx2D.ellipse){
+				counterclockwise = counterclockwise || false;
+				this.original('save',arguments);	
+				this.original('transform',[1, 0, 0, ry/rx, 0, 0]);
+				this.original('arc',[cx, cy/(ry/rx), rx,start, end, false]);
+				this.original('restore',arguments);
+			}
+			else{
+				this.original('ellipse',arguments);
+			}
 			return this;
 		},
 		fillRect : function () {
@@ -271,8 +286,30 @@
 		},
 		drawWindow : function () {
 			return this.original('drawWindow', arguments);
-		}
+		},
+		//Custom Methods
+		shadow : function (color,blur,offsetX,offsetY) {
+			this.shadowColor = color || this.shadowColor;
+			this.shadowBlur = blur || this.shadowBlur;
+			this.shadowOffsetX = offsetX || this.shadowBlur;
+			this.shadowOffsetY = offsetY || this.shadowOffsetY;
+			return this;
+		},
+		fillAll : function (style) {
+			this.save();
+			this.fillStyle = style;
+			return this.original('fillRect',[0,0,this.width,this.height]);
+			this.restore();
+			return this;
+		},
+		strokeAll : function (style)  {
+			this.save();
+			this.strokeStyle = style;
+			return this.original('strokeRect',[0,0,this.width,this.height]);
+			this.restore();
+			return this;
+		},
 	});
 	
-	HTMLCanvasElement.addContext('2d-t',t.canvas.context2d);
+	HTMLCanvasElement.addContext('teq-2d',t.canvas.context2d);
 })(window.t);

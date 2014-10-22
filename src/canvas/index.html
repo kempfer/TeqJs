@@ -52,7 +52,7 @@
 			t.dom.onReady(function () {
 				app = new t.AppCanvas();
 				canvas = document.getElementsByTagName('canvas')[0];
-				tcontext2D = canvas.getContext('2d-t');
+				tcontext2D = canvas.getContext('teq-2d');
 			
 				
 				path = new t.canvas.shapes.path({
@@ -70,9 +70,43 @@
 				});
 				app.addShapes(path);
 				tcontext2D
-					.arc(100, 100, 5, 0, 2 * Math.PI, false)
-					.rect(10,10,50,50)
-					.fill();
+					.save()
+					.set('fillStyle','red')
+					.beginPath()
+					.arc(100, 100, 20, 0,2*Math.PI, false)
+					.closePath()
+					.fill()
+					.restore()
+					.save()
+					.set('fillStyle','blue')
+					.fillRect(10,10,50,50)
+					.restore()
+					.beginPath()
+					.arc(200, 100, 20, 0,2*Math.PI, false)
+					.closePath()
+					.fill()
+					.save()
+					.set('fillStyle','red')
+					.beginPath()
+					.rect(188, 300, 200, 100)
+					.shadow('#999',20,15,15)
+					.closePath()
+					.fill()
+					.restore()
+					.set('fillStyle','green')
+					.beginPath()
+					.ellipse(70,250,70,250,0,2*Math.PI, false)
+					.closePath()
+					.fill()
+					.restore()
+					.set('fillStyle','blue')
+					.beginPath()
+					.ellipse(100,250,100,50,0,2*Math.PI, false)
+					.closePath()
+					.fill()
+					
+
+					
 			});
 		</script>
 	</body>
