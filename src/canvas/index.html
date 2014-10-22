@@ -50,11 +50,15 @@
 			var canvas;
 			var tcontext2D;
 			t.dom.onReady(function () {
-				app = new t.AppCanvas();
+				app = new t.AppCanvas({
+					width : 700,
+					height : 700});
 				canvas = document.getElementsByTagName('canvas')[0];
 				tcontext2D = canvas.getContext('teq-2d');
 			
-				
+			
+
+	
 				path = new t.canvas.shapes.path({
 					parts : [
 						{ method : 'moveTo', points : [ {x : 170, y :80}]},
@@ -68,6 +72,7 @@
 					fill : 'blue',
 					strokeWidth : 5
 				});
+				
 				app.addShapes(path);
 				tcontext2D
 					.save()
@@ -94,19 +99,29 @@
 					.fill()
 					.restore()
 					.set('fillStyle','green')
-					.beginPath()
-					.ellipse(70,250,70,250,0,2*Math.PI, false)
-					.closePath()
+					.ellipse(70,250,70,250,0,2*Math.PI, false, true)
 					.fill()
 					.restore()
+					.save()
 					.set('fillStyle','blue')
-					.beginPath()
-					.ellipse(100,250,100,50,0,2*Math.PI, false)
-					.closePath()
+					.opacity(0.5)
+					.ellipse(100,250,100,50,0,2*Math.PI, false, true)
 					.fill()
-					
-
-					
+					.restore()
+					.set('fillStyle','orange')
+					.roundedRect(250,230,70,60,15, true)
+					.fill()
+					.restore()
+					.set('fillStyle','orange')
+					.opacity(0.5)
+					.polygon([
+						{x :  395,y : 355},
+						{x :  490,y : 400},
+						{x :  440,y : 450},
+						{x :  400,y : 440}
+					], true)
+					.fill()
+					//5,5, 100,50, 50,100, 10,90
 			});
 		</script>
 	</body>

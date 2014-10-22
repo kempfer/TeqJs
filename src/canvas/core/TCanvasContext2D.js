@@ -199,16 +199,22 @@
 		drawImageFromRect : function () {
 			return this.original('drawImageFromRect',arguments);
 		},
-		ellipse : function (cx,cy,rx,ry,start,end,counterclockwise) {
+		ellipse : function (cx,cy,rx,ry,start,end,counterclockwise,wrap) {
+			if(wrap == true){
+				this.beginPath();
+			}
 			if(!this.originalCtx2D.ellipse){
 				counterclockwise = counterclockwise || false;
 				this.original('save',arguments);	
 				this.original('transform',[1, 0, 0, ry/rx, 0, 0]);
-				this.original('arc',[cx, cy/(ry/rx), rx,start, end, false]);
+				this.original('arc',[cx, cy/(ry/rx), rx,start, end, counterclockwise]);
 				this.original('restore',arguments);
 			}
 			else{
 				this.original('ellipse',arguments);
+			}
+			if(wrap == true){
+				this.closePath();
 			}
 			return this;
 		},
@@ -309,6 +315,49 @@
 			this.restore();
 			return this;
 		},
+		opacity : function (value) {
+			if(value > 1){
+				value = value /100;
+			}
+			this.globalAlpha = value;
+			return this;
+		},
+		roundedRect : function (x,y,w,h,r,wrap) {
+			var from, to;
+			if(wrap == true){
+				this.beginPath();
+			}
+			from = {x: x , y : y};
+			to =  {x: x + w , y : y + h };
+			this.moveTo (from.x, from.y + r)
+				.lineTo (from.x,   to.y - r)
+				.quadraticCurveTo(from.x, to.y, from.x + r, to.y)
+				.lineTo (to.x - r, to.y)
+				.quadraticCurveTo(to.x,to.y, to.x,to.y-r)
+				.lineTo (to.x, from.y + r)
+				.quadraticCurveTo(to.x, from.y, to.x-r, from.y)
+				.lineTo (from.x + r, from.y)
+				.quadraticCurveTo(from.x,from.y,from.x,from.y + r)
+			if(wrap == true){
+				this.closePath();
+			}
+			return this;
+		},
+		polygon : function (points,wrap) {
+			var i, point;
+			if(wrap == true){
+				this.beginPath();
+			}
+			this.moveTo(points[0].x, points[0].y);
+			for(i = 1; i < points.length; i++){
+				point = points[i];			
+				this.lineTo(point.x,point.y);
+			}
+			if(wrap == true){
+				this.closePath();
+			}
+			return this;
+		}
 	});
 	
 	HTMLCanvasElement.addContext('teq-2d',t.canvas.context2d);
