@@ -4,8 +4,10 @@
 		
 	var oldGetContext = HTMLCanvasElement.prototype.getContext,
 	
-	contextList = {};
-	
+	contextList = {},
+	toPoint = function (point) {
+		return   t.canvas.point.apply(null,point);
+	};
 	HTMLCanvasElement.prototype.getContext = function(name) {
 		if(name in contextList) {
 			return new contextList[name](this);
@@ -13,10 +15,10 @@
 		else{
 			return oldGetContext.apply(this, arguments);
 		}
-	}
+	},
 	HTMLCanvasElement.addContext = function(name,context) {
 		contextList[name] = context;
-	};
+	},
 	
 	t.Class.define('t.canvas.context2d', {
 		//"10px sans-serif"
@@ -164,7 +166,15 @@
 			return this.original('beginPath',arguments);
 		},
 		bezierCurveTo : function () {
-			return this.original('bezierCurveTo',arguments);
+			var point,point2,point3,
+				arg = arguments;
+			if(arguments.length  == 3){
+				point =  new t.canvas.point(arguments[0]),
+				point2 =  new t.canvas.point(arguments[1]),
+				point3 =  new t.canvas.point(arguments[2])
+				arg = [point.x,point.y,point2.x,point2.y,point3.x,point3.y];
+			}
+			return this.original('bezierCurveTo',arg);
 		},
 		clearRect: function () {
 			return this.original('clearRect',arguments);
@@ -237,13 +247,15 @@
 			return this.original('isPointInStroke',arguments, true);
 		},
 		lineTo : function () {
-			return this.original('lineTo',arguments);
+			var point = toPoint(arguments);
+			return this.original('lineTo',[point.x,point.y]);
 		},
 		measureText : function () {
 			return this.original('lineTo',arguments, true);
 		},
 		moveTo : function () {
-			return this.original('moveTo',arguments);
+			var point = toPoint(arguments);
+			return this.original('moveTo',[point.x,point.y]);
 		},
 		putImageData : function () {
 			return this.original('putImageData',arguments);
@@ -350,14 +362,28 @@
 			}
 			this.moveTo(points[0].x, points[0].y);
 			for(i = 1; i < points.length; i++){
-				point = points[i];			
-				this.lineTo(point.x,point.y);
+				point = points[i];	
+				this.lineTo(points[i]);
 			}
 			if(wrap == true){
 				this.closePath();
 			}
 			return this;
-		}
+		},
+		path : function (parts,wrap) {
+			var i, part;
+			if(wrap == true){
+				this.beginPath();
+			}
+			for(i = 0; i < parts.length; i++) {
+				part = parts[i];
+				this[part.method].apply(this,part.points);
+			}
+			if(wrap == true){
+				this.closePath();
+			}
+			return this;
+		},
 	});
 	
 	HTMLCanvasElement.addContext('teq-2d',t.canvas.context2d);

@@ -59,7 +59,7 @@
 			
 
 	
-				path = new t.canvas.shapes.path({
+				/*path = new t.canvas.shapes.path({
 					parts : [
 						{ method : 'moveTo', points : [ {x : 170, y :80}]},
 						{ method : 'curveTo', points : [ {x : 130, y : 100} , {x : 130, y :150}, {x : 230, y :150}]},
@@ -74,7 +74,7 @@
 					strokeStyle : 'rgb(0, 139, 255)'
 				});
 				
-				app.addShapes(path);
+				app.addShapes(path);*/
 				tcontext2D
 					.save()
 					.set('fillStyle','red')
@@ -109,11 +109,12 @@
 					.opacity(0.5)
 					.ellipse(100,250,100,50,0,2*Math.PI, false, true)
 					.fill()
-					.restore()
+					.save()
 					.set('fillStyle','orange')
-					.roundedRect(250,230,100,60,30, true)
+					//.roundedRect(250,230,100,60,30, true)
 					.fill()
 					.restore()
+					.save()
 					.set('fillStyle','rgb(255, 0, 184)')
 					.opacity(80)
 					.polygon([
@@ -123,6 +124,24 @@
 						{x :  450,y : 440}
 					], true)
 					.fill()
+					.restore()
+					.save()
+					.set({
+						fillStyle : 'rgb(129, 196, 252)',
+						strokeStyle : 'rgb(0, 139, 255)',
+						lineWidth : 5
+					})
+					.path([
+						{ method : 'moveTo', points : [ {x : 170, y :80}]},
+						{ method : 'bezierCurveTo', points : [ {x : 130, y : 100} , {x : 130, y :150}, {x : 230, y :150}]},
+						{ method : 'bezierCurveTo', points : [ {x : 250, y : 180} , {x : 320, y :180}, {x : 340, y :150}]},
+						{ method : 'bezierCurveTo', points : [ {x : 420, y : 150} , {x : 420, y :120}, {x : 390, y :100}]},
+						{ method : 'bezierCurveTo', points : [ {x : 430, y : 40} , {x : 370, y :30}, {x : 340, y :50}]},
+						{ method : 'bezierCurveTo', points : [ {x : 320, y : 5} , {x : 250, y :20}, {x : 250, y :50}]},
+						{ method : 'bezierCurveTo', points : [ {x : 200, y : 5} , {x : 150, y :20}, {x : 170, y :80}]}
+					], true)
+					.fill()
+					.stroke()
 					//5,5, 100,50, 50,100, 10,90
 			});
 		</script>
