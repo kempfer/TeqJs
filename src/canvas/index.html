@@ -51,7 +51,7 @@
 			var tcontext2D;
 			t.dom.onReady(function () {
 				app = new t.AppCanvas({
-					width : 700,
+					width : 900,
 					height : 700});
 				canvas = document.getElementsByTagName('canvas')[0];
 				tcontext2D = canvas.getContext('teq-2d');
@@ -69,8 +69,9 @@
 						{ method : 'curveTo', points : [ {x : 320, y : 5} , {x : 250, y :20}, {x : 250, y :50}]},
 						{ method : 'curveTo', points : [ {x : 200, y : 5} , {x : 150, y :20}, {x : 170, y :80}]}
 					],
-					fill : 'blue',
-					strokeWidth : 5
+					fill : 'rgb(129, 196, 252)',
+					strokeWidth : 5,
+					strokeStyle : 'rgb(0, 139, 255)'
 				});
 				
 				app.addShapes(path);
@@ -86,8 +87,9 @@
 					.set('fillStyle','blue')
 					.fillRect(10,10,50,50)
 					.restore()
-					.beginPath()
-					.arc(200, 100, 20, 0,2*Math.PI, false)
+					.set('fillStyle','rgb(255, 232, 0)')
+					.beginPath()					
+					.arc(500, 100, 50, 0,2*Math.PI, false)
 					.closePath()
 					.fill()
 					.save()
@@ -99,7 +101,7 @@
 					.fill()
 					.restore()
 					.set('fillStyle','green')
-					.ellipse(70,250,70,250,0,2*Math.PI, false, true)
+					.ellipse(670,250,70,250,0,2*Math.PI, false, true)
 					.fill()
 					.restore()
 					.save()
@@ -109,16 +111,16 @@
 					.fill()
 					.restore()
 					.set('fillStyle','orange')
-					.roundedRect(250,230,70,60,15, true)
+					.roundedRect(250,230,100,60,30, true)
 					.fill()
 					.restore()
-					.set('fillStyle','orange')
-					.opacity(0.5)
+					.set('fillStyle','rgb(255, 0, 184)')
+					.opacity(80)
 					.polygon([
-						{x :  395,y : 355},
-						{x :  490,y : 400},
-						{x :  440,y : 450},
-						{x :  400,y : 440}
+						{x :  445,y : 355},
+						{x :  540,y : 400},
+						{x :  490,y : 450},
+						{x :  450,y : 440}
 					], true)
 					.fill()
 					//5,5, 100,50, 50,100, 10,90
