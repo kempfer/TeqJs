@@ -156,15 +156,33 @@
 			}
 			return this;
 		},
-		arc: function () {
+		/**
+		*@params x The x-coordinate of the center of the circle
+		*@params y The y-coordinate of the center of the circle
+		*@params r The x-coordinate of the center of the circle
+		*@params sAngle The starting angle, in radians (0 is at the 3 o'clock position of the arc's circle)
+		*@params eAngle The ending angle, in radians
+		*@params counterclockwise Optional. Specifies whether the drawing should be counterclockwise or clockwise. False is default, and indicates clockwise, while true indicates counter-clockwise. 
+		*@return {t.canvas.context2d}
+		**/
+		arc: function (x,y,r,sAngle,eAngle,counterclockwise) {
 			return this.original('arc',arguments);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		fill : function () {
 			return this.original('fill',arguments);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		beginPath : function () {
 			return this.original('beginPath',arguments);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		bezierCurveTo : function () {
 			var point,point2,point3,
 				arg = arguments;
@@ -176,15 +194,27 @@
 			}
 			return this.original('bezierCurveTo',arg);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		clearRect: function () {
 			return this.original('clearRect',arguments);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		clearShadow: function () {
 			return this.original('clearShadow',arguments);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		clip : function () {
 			return this.original('clip',arguments);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		closePath: function () {
 			return this.original('closePath',arguments);
 		},
@@ -200,15 +230,27 @@
 		createRadialGradient : function () {
 			return this.original('createRadialGradient',arguments, true);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		drawFocusIfNeeded : function () {
 			return this.original('drawFocusIfNeeded',arguments);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		drawImage : function () {
 			return this.original('drawImage',arguments);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		drawImageFromRect : function () {
 			return this.original('drawImageFromRect',arguments);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		ellipse : function (cx,cy,rx,ry,start,end,counterclockwise,wrap) {
 			if(wrap == true){
 				this.beginPath();
@@ -228,9 +270,15 @@
 			}
 			return this;
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		fillRect : function () {
 			return this.original('fillRect',arguments);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		fillText : function () {
 			return this.original('fillText',arguments, true);
 		},
@@ -246,66 +294,123 @@
 		isPointInStroke : function () {
 			return this.original('isPointInStroke',arguments, true);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		lineTo : function () {
 			var point = toPoint(arguments);
 			return this.original('lineTo',[point.x,point.y]);
 		},
 		measureText : function () {
-			return this.original('lineTo',arguments, true);
+			return this.original('measureText',arguments, true);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		moveTo : function () {
 			var point = toPoint(arguments);
 			return this.original('moveTo',[point.x,point.y]);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		putImageData : function () {
 			return this.original('putImageData',arguments);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		quadraticCurveTo : function () {
 			return this.original('quadraticCurveTo',arguments);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		rect : function () {
 			return this.original('rect',arguments);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		resetTransform: function () {
 			return this.original('resetTransform',arguments);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		restore : function () {
 			return this.original('restore',arguments);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		rotate : function () {
 			return this.original('rotate',arguments);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		save : function () {
 			return this.original('save',arguments);
-		} ,
+		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		scale : function () {
 			return this.original('scale',arguments);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		setTransform : function () {
 			return this.original('setTransform',arguments);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		stroke : function () {
 			return this.original('stroke',arguments);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		strokeRect : function () {
 			return this.original('strokeRect',arguments);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		strokeText : function () {
 			return this.original('strokeText',arguments);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		transform: function () {
 			return this.original('transform',arguments);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		translate : function () {
 			return this.original('translate',arguments);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		clearAll : function () {
 			return this.original('clearRect',[0,0,this.width,this.height]);
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		drawWindow : function () {
 			return this.original('drawWindow', arguments);
 		},
 		//Custom Methods
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		shadow : function (color,blur,offsetX,offsetY) {
 			this.shadowColor = color || this.shadowColor;
 			this.shadowBlur = blur || this.shadowBlur;
@@ -313,6 +418,9 @@
 			this.shadowOffsetY = offsetY || this.shadowOffsetY;
 			return this;
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		fillAll : function (style) {
 			this.save();
 			this.fillStyle = style;
@@ -320,6 +428,9 @@
 			this.restore();
 			return this;
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		strokeAll : function (style)  {
 			this.save();
 			this.strokeStyle = style;
@@ -327,6 +438,9 @@
 			this.restore();
 			return this;
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		opacity : function (value) {
 			if(value > 1){
 				value = value /100;
@@ -334,6 +448,9 @@
 			this.globalAlpha = value;
 			return this;
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		roundedRect : function (x,y,w,h,r,wrap) {
 			var from, to;
 			if(wrap == true){
@@ -355,6 +472,9 @@
 			}
 			return this;
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		polygon : function (points,wrap) {
 			var i, point;
 			if(wrap == true){
@@ -370,6 +490,9 @@
 			}
 			return this;
 		},
+		/**
+		*@return {t.canvas.context2d}
+		**/
 		path : function (parts,wrap) {
 			var i, part;
 			if(wrap == true){
