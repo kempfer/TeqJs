@@ -280,7 +280,7 @@
 		*@return {t.canvas.context2d}
 		**/
 		fillText : function () {
-			return this.original('fillText',arguments, true);
+			return this.original('fillText',arguments);
 		},
 		getContextAttributes : function () {
 			return this.original('getContextAttributes',arguments, true);
@@ -412,10 +412,30 @@
 		*@return {t.canvas.context2d}
 		**/
 		shadow : function (color,blur,offsetX,offsetY) {
-			this.shadowColor = color || this.shadowColor;
-			this.shadowBlur = blur || this.shadowBlur;
-			this.shadowOffsetX = offsetX || this.shadowBlur;
-			this.shadowOffsetY = offsetY || this.shadowOffsetY;
+			var shadow = t.args(arguments).toObject(['color','blur','offsetX','offsetY']);
+			this.originalCtx2D.shadowColor = shadow.color || this.shadowColor;
+			this.originalCtx2D.shadowBlur = shadow.blur || this.shadowBlur;
+			this.originalCtx2D.shadowOffsetX = shadow.offsetX || this.shadowBlur;
+			this.originalCtx2D.shadowOffsetY = shadow.offsetY || this.shadowOffsetY;
+			return this;
+		},
+		/**
+		*@return {t.canvas.context2d}
+		*@param style string Specifies the font style. Possible values:	normal, italic, oblique
+		*@param variant string Specifies the font variant. Possible values:	normal, small-caps
+		*@param weight string Specifies the font weight. Possible values:	normal, bold, bolder,lighter,100,200,300,400,500,600,700,800,900
+		*@param size integer Specifies the font size and the line-height, in pixels
+		*@param family Specifies the font family
+		**/
+		setFont: function (style, variant, weight, size, family) {
+			var value;
+			if(arguments.length == 1 && t.isString(style)) {
+				value = arguments[0];
+			}
+			else{
+				value = t.args(arguments).toArray().join(" ");
+			}
+			this.originalCtx2D.font = value;
 			return this;
 		},
 		/**
