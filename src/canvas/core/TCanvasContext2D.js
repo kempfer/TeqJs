@@ -433,7 +433,7 @@
 				value = arguments[0];
 			}
 			else{
-				value = t.args(arguments).toArray().join(" ");
+				value = t.args(arguments).toArray(['style','variant','weight','size','family']).join(" ");
 			}
 			this.originalCtx2D.font = value;
 			return this;

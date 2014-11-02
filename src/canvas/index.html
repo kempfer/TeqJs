@@ -13,7 +13,7 @@
 		<script type="text/javascript"  src="../class/TeqBasesClass.js"></script>	
 		<script type="text/javascript"  src="../plugins/TeqPromise.js"></script>	
 		<script type="text/javascript"  src="../plugins/TeqAnimation.js"></script>
-		<script type="text/javascript"  src="../plugins/TeqArgs.js"></script>
+		<script type="text/javascript"  src="../utils/TeqArgs.js"></script>
 		<script type="text/javascript"  src="../class/TeqClassMouse.js"></script>
 		<script type="text/javascript"  src="../class/TeqClassKeyboard.js"></script>
 		<script type="text/javascript"  src="core/TCanvas.js"></script>		
@@ -95,7 +95,7 @@
 					.set('fillStyle','red')
 					.beginPath()
 					.rect(188, 300, 200, 100)
-					.shadow(['#999',20,15,15])
+					.shadow('#999',20,15,15)
 					.closePath()
 					.fill()
 					.restore()
@@ -144,9 +144,14 @@
 					.stroke()
 					.restore()
 					.save()
+					.set('strokeStyle', 'red')
+					.setFont('italic','small-caps','bold','30px','Arial')
+					.strokeText("Teq Canvas",600, 600)
+					.restore()
+					.save()
 					.set('fillStyle', 'red')
-					.setFont(['italic','small-caps','bold','30px','Arial'])
-					.fillText("Teq Canvas",600, 600)
+					.setFont(['italic','','bold','30px','Comic'])
+					.fillText("Teq Canvas",600, 650)
 					.restore()
 					//5,5, 100,50, 50,100, 10,90
 			});
