@@ -3,9 +3,9 @@
 	'use strict';
 	
 	
-	var Args = function (args,mode) {
+	var Args = function (args) {
 		if(!(this instanceof Args)){
-			return new Args(args,mode);
+			return new Args(args);
 		}
 		this.args = args;
 	};
@@ -13,7 +13,6 @@
 		constructor: Args,
 		
 		args : null,
-		processed : null,
 		
 		toArray : function (indexs) {
 			var i, array = [];
@@ -32,7 +31,6 @@
 			}
 			return array;
 		},
-		
 		toObject : function (indexs) {
 			var i, object = {}, array;
 			if(t.isObject(this.args[0])) {
@@ -45,23 +43,17 @@
 				}
 			}
 			return object;
-			
 		},
 		defaults : function () {
-			
-		},		
-		required : function (){
-			if(arguments[0] == 'all') {
-				return this.allRequired();
+			var i, 
+				l = arguments.length;
+			for(i = 0; i < l; i++) {
+				if(typeof this.args[i] === "undefined" ){
+					this.args[i] = arguments[i];
+				}
 			}
-		},
-		allRequired : function () {
-			
+			return this;
 		}
-		
-		
 	};
-
-	
 	t.args = Args;
 })(window.t);
