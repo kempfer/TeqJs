@@ -16,10 +16,12 @@
 		<script type="text/javascript"  src="plugins/TeqModelWebSql.js"></script>		
 		<script type="text/javascript"  src="plugins/TeqUri.js"></script>	
 		<script type="text/javascript"  src="plugins/TeqValidator.js"></script>	
+		<script type="text/javascript"  src="utils/TeqArgs.js"></script>	
+		<script type="text/javascript"  src="utils/TeqColor.js"></script>	
 	</head>
 	<body>
 		<script>
-			var test = t.validator(
+			/*var test = t.validator(
 				{
 					name: "5",
 					email : "",
@@ -30,7 +32,7 @@
 					firstName : "requiredIf:name,5"
 				}				
 			);
-			/*var model;
+			var model;
 			var test;
 			t.dom.onReady(function () {
 				

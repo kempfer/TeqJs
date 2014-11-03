@@ -3,14 +3,14 @@
 	'use strict';
 	
 	
-	var Args = function (args) {
-		if(!(this instanceof Args)){
-			return new Args(args);
+	var TeqArgs = function (args) {
+		if(!(this instanceof TeqArgs)){
+			return new TeqArgs(args);
 		}
 		this.args = args;
 	};
-	Args.prototype = {	
-		constructor: Args,
+	TeqArgs.prototype = {	
+		constructor: TeqArgs,
 		
 		args : null,
 		
@@ -20,9 +20,9 @@
 				array = this.args[0];
 			}
 			else if(t.isObject(this.args[0])) {
-				for(i = 0; i < this.args[0].length; i++){
-					if(this.args[0][i]) {
-						array[i] = this.args[0][i];
+				for(i = 0; i < indexs.length; i++){
+					if(this.args[0][indexs[i]]) {
+						array[i] = this.args[0][indexs[i]];
 					}
 				}
 			}
@@ -55,5 +55,5 @@
 			return this;
 		}
 	};
-	t.args = Args;
+	t.args = TeqArgs;
 })(window.t);
