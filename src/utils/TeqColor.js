@@ -2,14 +2,15 @@
 
 	'use strict';
 	
-	var TeqColor = function () {
+	var TeqColor = function (red,green,blue,alpha) {
+		if(!(this instanceof TeqColor)){
+			return  new TeqColor(red,green,blue,alpha);
+		};
 		var args, values,colorName;
 			args = arguments;
-		if(!(this instanceof TeqColor)){
-			return new TeqColor(Array.prototype.slice.call(args));
-		};
+		console.log(arguments);
 		if(args.length == 1 && t.isString(args[0])){
-			colorName = color.toLowerCase();
+			colorName = args[0].toLowerCase();
 			if(TeqColor.checkHex(args[0])) {
 				values = TeqColor.hexToRgb(args[0]);
 			}
@@ -166,8 +167,8 @@
 		green : '#008000',
 		olive : '#808000',
 	};
-	TeqColor.from = function (object) {
-		return object instanceof TeqColor ? object : new TeqColor (object);
+	TeqColor.from = function (red,green,blue,alpha) {
+		return red instanceof TeqColor ? red : new TeqColor (red,green,blue,alpha);
 	}
 	t.color = TeqColor;
 })(window.t);

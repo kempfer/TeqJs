@@ -53,7 +53,7 @@
 				}
 			}
 			return this;
-		}
+		},
 	};
 	t.args = TeqArgs;
 })(window.t);
