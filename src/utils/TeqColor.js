@@ -2,23 +2,23 @@
 
 	'use strict';
 	
-	var TeqColor = function (red,green,blue,alpha) {
-		if(!(this instanceof TeqColor)){
-			return  new TeqColor(red,green,blue,alpha);
-		};
+	var TeqColor = function (red,green, blue,alpha) {		
 		var args, values,colorName;
-			args = arguments;
-		console.log(arguments);
+			args = arguments;		
+		if(!(this instanceof TeqColor)){								
+			return new TeqColor(red,green, blue,alpha);
+		}				
+		t.args.clean(args);
 		if(args.length == 1 && t.isString(args[0])){
-			colorName = args[0].toLowerCase();
-			if(TeqColor.checkHex(args[0])) {
-				values = TeqColor.hexToRgb(args[0]);
+			colorName = args[0].toLowerCase();			
+			if(TeqColor.checkHex(args[0])) {				
+				values = TeqColor.hexToRgb(args[0]);								
 			}
 			else if (colorName in t.color.colorList){
 				values = TeqColor.hexToRgb(t.color.colorList[colorName]);
 			}
 			else {
-				new Error('Invalid color format');
+				throw Error('Invalid color format');
 			}
 		} 
 		else{
@@ -147,7 +147,7 @@
 		return [t.number.random(0,255),t.number.random(0,255),t.number.random(0,255)];
 	};
 	TeqColor.checkHex = function (hex) {
-		return /^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/.test(hex);
+		return /^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/.test(hex) && TeqColor.hexToRgb(hex) !== null;
 	};
 	TeqColor.colorList = {
 		red : '#FF0000',
@@ -167,8 +167,8 @@
 		green : '#008000',
 		olive : '#808000',
 	};
-	TeqColor.from = function (red,green,blue,alpha) {
-		return red instanceof TeqColor ? red : new TeqColor (red,green,blue,alpha);
+	TeqColor.from = function (object) {
+		return object instanceof TeqColor ? object : new TeqColor (object);
 	}
 	t.color = TeqColor;
 })(window.t);
