@@ -53,7 +53,16 @@
 				}
 			}
 			return this;
-		}
+		}		
+	};	
+	TeqArgs.clean = function clean (args) {
+		var i,
+			l = args.length;
+		for(i = args.length -1; i >= 0; i--){						
+			if(typeof args[i] === "undefined"){								
+				[].pop.apply(args);
+			}
+		}	
 	};
 	t.args = TeqArgs;
 })(window.t);
