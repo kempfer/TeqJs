@@ -294,6 +294,9 @@
 		isPointInStroke : function () {
 			return this.original('isPointInStroke',arguments, true);
 		},
+		getImageData : function () {
+			return this.original('getImageData',arguments, true);
+		},
 		/**
 		*@return {t.canvas.context2d}
 		**/
@@ -527,6 +530,21 @@
 			}
 			return this;
 		},
+		/**
+		*@return {ImageData}
+		**/ 
+		getPixel: function () {
+			var point = toPoint(arguments);
+			return  this.getImageData(point.x, point.y, 1, 1);
+		},
+		getPixelColor : function () {
+			var colorData,
+				point = toPoint(arguments),
+				ImageData = this.getPixel(point);
+			colorData = [].slice.call(ImageData.data);
+			colorData[3] /= 255;
+			return t.color ? new t.color(colorData) : colorData;
+		}
 	});
 	
 	HTMLCanvasElement.addContext('teq-2d',t.canvas.context2d);
