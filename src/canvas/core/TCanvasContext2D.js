@@ -5,8 +5,8 @@
 	var oldGetContext = HTMLCanvasElement.prototype.getContext,
 	
 	contextList = {},
-	toPoint = function (point) {
-		return   t.canvas.point.apply(null,point);
+	toPoint = function (x,y) {
+		return  new t.canvas.point(x,y);
 	};
 	HTMLCanvasElement.prototype.getContext = function(name) {
 		if(name in contextList) {
@@ -300,8 +300,8 @@
 		/**
 		*@return {t.canvas.context2d}
 		**/
-		lineTo : function () {
-			var point = toPoint(arguments);
+		lineTo : function (x,y) {
+			var point = toPoint(x,y);
 			return this.original('lineTo',[point.x,point.y]);
 		},
 		measureText : function () {
@@ -310,8 +310,8 @@
 		/**
 		*@return {t.canvas.context2d}
 		**/
-		moveTo : function () {
-			var point = toPoint(arguments);
+		moveTo : function (x,y) {
+			var point = toPoint(x,y);
 			return this.original('moveTo',[point.x,point.y]);
 		},
 		/**
@@ -533,13 +533,13 @@
 		/**
 		*@return {ImageData}
 		**/ 
-		getPixel: function () {
-			var point = toPoint(arguments);
+		getPixel: function (x,y) {
+			var point = toPoint(x,y);
 			return  this.getImageData(point.x, point.y, 1, 1);
 		},
-		getPixelColor : function () {
+		getPixelColor : function (x,y) {
 			var colorData,
-				point = toPoint(arguments),
+				point = toPoint(x,y),
 				ImageData = this.getPixel(point);
 			colorData = [].slice.call(ImageData.data);
 			colorData[3] /= 255;

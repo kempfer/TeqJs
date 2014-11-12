@@ -70,6 +70,7 @@
 			
 		},
 		clear : function () {
+            console.log(this.context);
 			this.context.clearRect ( 0 , 0 , this.width , this.height );
 		},
 		toImage : function (type) {
@@ -94,7 +95,7 @@
 	/** @private */
 
 	t.canvas.buffer =  function (width,height) {
-		return t.dom.create('canvas',{width: width, height:height}).first.getContext('2d');
+		return t.dom.create('canvas',{width: width, height:height}).first.getContext('teq-2d');
 	};
 
 	t.canvas.degree = function (num) {

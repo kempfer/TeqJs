@@ -20,14 +20,8 @@
 		_render : function (ctx) {	
 			this._counted();
 			var i,points,point;
-			points = this._points;		
-			ctx.beginPath();
-			ctx.moveTo(points[0].x, points.y);
-			for(i = 0; i < points.length; i++){
-				point = points[i];			
-				ctx.lineTo(point.x,point.y);
-			}
-			ctx.closePath();
+			points = this._points;	
+			ctx.polygon(points, true);
 			this._renderFill(ctx);
 			this._renderStroke(ctx);
 		},

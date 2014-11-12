@@ -34,7 +34,7 @@
 		toObject : function (indexs) {
 			var i, object = {}, array;
 			if(t.isObject(this.args[0])) {
-				object = object;
+				object = this.args[0];
 			}
 			else{
 				array = (!t.isArray(this.args[0])) ? Array.prototype.slice.call(this.args) :  this.args[0];				
